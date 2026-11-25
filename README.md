@@ -24,6 +24,7 @@ Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4`, `radio_cut_<lang>.mp4`.
 | music | `pipeline/music.py` + `notebooks/` | ACE-Step 1.5 cue sheet + Kaggle notebook or WaveSpeed (`--generate`) | Kaggle / API |
 | assembly | `pipeline/assemble.py` | FFmpeg (xfade, ducking, bilingual title/subs, loudnorm, end card) | local |
 | runner | `pipeline/run.py` | One-command end-to-end orchestrator | local |
+| mcp server | `pipeline/mcp_server.py` | Optional MCP tool wrapper (`python -m pipeline.mcp_server`) for agents | local |
 
 Change one shot in `storyboard.json` and re-run: only that shot's stage outputs regenerate (hash of inputs, `outputs/.cache.json`).
 

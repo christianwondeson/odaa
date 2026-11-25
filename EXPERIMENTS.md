@@ -39,5 +39,15 @@ Hypothesis: Normalizing slow TTS phrasing (`1.22x` via FFmpeg `atempo` when not 
 Change: Added `narration_tempo()` in `pipeline/common.py` and `atempo` + softer low-passed placeholder pad (`650 Hz`) in `pipeline/assemble.py`.
 Result: Runtime dropped from `109.33s` to `87.34s` (`radio_cut_am.mp4` `84.8s`, `film_9x16.mp4` & `film_16x9.mp4` `87.3s`), inside the `60–90s` target.
 
+## E09 - Benchmark: `@cf/black-forest-labs/flux-2-klein-4b` (with portrait refs) vs `@cf/black-forest-labs/flux-1-schnell` (no refs)
+Hypothesis: Dropping portrait references in `flux-1-schnell` causes severe character identity and style drift across shots compared to `flux-2-klein-4b`.
+Change: Generated `shot_04` and `shot_10` with `@cf/black-forest-labs/flux-1-schnell` (`outputs/benchmarks/shot_04_schnell.jpg`, `shot_10_schnell.jpg`) using identical prompts/aspect (`1024x1024`, 4 steps, `/seed` omitted due to Cloudflare schema constraint `F08`).
+Result: `schnell` drifted wildly between a 2D cartoon style in `shot_04` (`59.83s`) and hyper-real photography with an elderly headwrapped woman + 3-hand artifact in `shot_10` (`4.47s`, `runs.jsonl`), whereas `flux-2-klein-4b` preserved both `ref_girl` and `ref_woman` identity and painterly consistency (~`7s`/shot). Ready for 5-person blind preference test.
+
+## E10 - Packaging the pipeline as an MCP server for coding agents (`pipeline/mcp_server.py`)
+Hypothesis: Wrapping `storyboard.json` validation, shot listing, single-shot regeneration, and full `build_film` as MCP tools (`mcp>=2` `MCPServer`) lets any coding agent drive the film pipeline directly without memorizing CLI commands.
+Change: Built `pipeline/mcp_server.py` exposing `validate_storyboard`, `list_shots`, `regenerate_shot`, and `build_film` over stdio.
+Result: Verified `mcp.list_tools()` registers all 4 tools and `validate_storyboard()` returns `{'shots': 10, 'total_seconds': 87.34}`.
+
 ## Candidate experiments
-Same prompt with/without the character block; 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; open vs frontier keyframes (optional ceiling).
+3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS; 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

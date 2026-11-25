@@ -23,7 +23,11 @@ def gemini_tts(text, style, voice, model):
                                      "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}}}
         r = requests.post(f"{GEMINI}/models/{model}:generateContent", headers=hdr, json=body, timeout=180)
         r.raise_for_status()
-        part = r.json()["candidates"][0]["content"]["parts"][0]["inlineData"]
+        cand = (r.json().get("candidates") or [{}])[0]
+        parts = (cand.get("content") or {}).get("parts") or []
+        if not parts or "inlineData" not in parts[0]:
+            raise RuntimeError(f"no audio content in 2.5 TTS response: {cand}")
+        part = parts[0]["inlineData"]
         raw = base64.b64decode(part["data"])
         return raw if raw[:4] == b"RIFF" else _pcm_to_wav(raw)
     body = {"model": model,
@@ -47,8 +51,8 @@ def cf_image(prompt, seed, model, width=1024, height=1024, ref_paths=()):
     """Cloudflare Workers AI image. FLUX.2 klein takes multipart form data; up to 4 reference images (keep them small)."""
     url = f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CF_ACCOUNT_ID']}/ai/run/{model}"
     hdr = {"Authorization": f"Bearer {os.environ['CF_API_TOKEN']}"}
-    if "schnell" in model:  # FLUX.1 schnell: JSON in, no reference images
-        r = requests.post(url, headers=hdr, json={"prompt": prompt, "steps": 4, "seed": seed}, timeout=180)
+    if "schnell" in model:  # FLUX.1 schnell: JSON in, no reference images, /seed rejected by Workers AI schema
+        r = requests.post(url, headers=hdr, json={"prompt": prompt, "steps": 4}, timeout=180)
         r.raise_for_status(); return base64.b64decode(r.json()["result"]["image"])
     fields = {"prompt": (None, prompt), "seed": (None, str(seed)), "width": (None, str(width)), "height": (None, str(height))}
     for i, p in enumerate(list(ref_paths)[:4]):
