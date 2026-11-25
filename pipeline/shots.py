@@ -10,16 +10,16 @@ def fhash(p):
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12] if p.exists() else "none"
 
 def kb_filter(camera, W, H, frames):
-    # Smooth eased progress e in [0, 1] and 3x oversampling avoid zoompan pixel jitter.
+    # Smooth eased progress e in [0, 1], 3x oversampling, and unified warm-emerald film grade.
     e = f"0.5*(1-cos(PI*min(on/{frames},1)))"
     z = {
         "push_in": f"1+0.18*({e})",
         "pull_back": f"1.18-0.18*({e})",
-        "pan_left": "1.14",
-        "pan_right": "1.14",
-        "pan_up": "1.14",
-        "pan_down": "1.14",
-        "static": f"1.02+0.04*({e})",
+        "pan_left": f"1.14+0.04*({e})",
+        "pan_right": f"1.14+0.04*({e})",
+        "pan_up": f"1.14+0.04*({e})",
+        "pan_down": f"1.14+0.04*({e})",
+        "static": f"1.02+0.05*({e})",
     }[camera]
     x = {
         "pan_left": f"(iw-iw/zoom)*(1-({e}))",
@@ -31,7 +31,8 @@ def kb_filter(camera, W, H, frames):
     }.get(camera, "ih/2-ih/zoom/2")
     return (f"scale={W*3}:{H*3}:force_original_aspect_ratio=increase,crop={W*3}:{H*3},"
             f"zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={W}x{H}:fps={FPS},"
-            f"vignette=PI/7,format=yuv420p")
+            f"eq=contrast=1.05:saturation=1.06,colorbalance=rs=0.02:gs=0.01:bs=-0.02,"
+            f"vignette=PI/6,format=yuv420p")
 
 def main(only=None):
     load_env()

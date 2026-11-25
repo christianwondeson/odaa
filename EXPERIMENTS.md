@@ -49,5 +49,10 @@ Hypothesis: Wrapping `storyboard.json` validation, shot listing, single-shot reg
 Change: Built `pipeline/mcp_server.py` exposing `validate_storyboard`, `list_shots`, `regenerate_shot`, and `build_film` over stdio.
 Result: Verified `mcp.list_tools()` registers all 4 tools and `validate_storyboard()` returns `{'shots': 10, 'total_seconds': 87.34}`.
 
+## E11 - Unifying Odaa visual continuity, 35mm color grade, and `fadeblack` dramatic pacing
+Hypothesis: Conditioning Shots `01`, `02`, `06`, `08`, `09`, `10` jointly on `ref_odaa` + `ref_girl`/`ref_woman`, locking a 35mm golden-ochre/emerald `style_block`, adding unified FFmpeg `eq`+`colorbalance` grading, and using a `0.65s` `fadeblack` dip before the `shot_07` breakthrough removes visual disjointedness and improves cinematic flow.
+Change: Updated `storyboard.json`, `pipeline/keyframes.py`, `pipeline/shots.py`, and `pipeline/assemble.py`; caught and fixed a 4-arm prompt artifact on `shot_07` (`seed 3007 -> 3107`).
+Result: All 10 keyframes and both `87.28s` films (`film_9x16.mp4` 35.9 MB, `film_16x9.mp4` 33.6 MB) now share cohesive color, character identity, and continuous Odaa tree visual links.
+
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS; 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

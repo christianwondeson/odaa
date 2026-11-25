@@ -87,7 +87,7 @@ def main(mode="film"):
         log_run("assemble", "ffmpeg", None, {"mode": "radio", "music": kind, "seconds": total}, None, time.time() - t0)
         print(f"radio cut: {total:.1f}s (music: {kind})"); return
     write_srt(work / "end.srt", [(body + 0.3, total - 0.2, sb["end_card"]["text"])])
-    fade_d = 0.45
+    fade_d = 0.65
     for asp, (W, H) in ASPECTS.items():
         clips = [OUT / "shots" / f"shot_{s['id']}_{asp}.mp4" for s in sb["shots"]]
         missing = [c.name for c in clips if not c.exists()]
@@ -112,7 +112,9 @@ def main(mode="film"):
             offset += clip_durs[idx]
             nxt = f"v{idx+1}"
             out_lbl = f"xf{idx}"
-            fc_parts.append(f"[{cur}][{nxt}]xfade=transition=fade:duration={fade_d}:offset={offset:.3f}[{out_lbl}]")
+            # Use dramatic dip-to-black before shot 07 breakthrough; smooth crossfades elsewhere.
+            trans = "fadeblack" if idx == 5 else "fade"
+            fc_parts.append(f"[{cur}][{nxt}]xfade=transition={trans}:duration={fade_d}:offset={offset:.3f}[{out_lbl}]")
             cur = out_lbl
         # libass sizes fonts on a 288px-high virtual canvas, not real pixels
         fs, ts, es = (8, 12, 11) if asp == "9x16" else (11, 16, 15)

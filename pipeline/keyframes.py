@@ -24,7 +24,7 @@ def main(only=None):
     for s in sb["shots"]:
         refs = s.get("refs", [])
         has_person = "ref_girl" in refs or "ref_woman" in refs
-        style = sb["style_block"] if has_person else sb["style_block"].replace("expressive Ethiopian East African faces, ", "")
+        style = sb["style_block"]
         parts = [style]
         if "ref_girl" in refs and "ref_woman" not in refs:
             parts.append(sb["character_block"])
@@ -33,6 +33,8 @@ def main(only=None):
         if refs:
             desc = "; ".join(f"Image {i} ({ref_notes.get(r, r)})" for i, r in enumerate(refs))
             p = f"Use the visual references: {desc}. " + p
+        if not has_person:
+            p += ". Botanical nature only, zero faces or people."
         jobs.append((f"shot_{s['id']}", p, s["seed"], refs))
     for name, prompt, seed, refs in jobs:
         if only and name != only: continue

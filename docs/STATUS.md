@@ -6,8 +6,8 @@
 - [ ] Amharic TTS reviewed by a native speaker (Amharic lines are an UNVERIFIED draft; 10/10 WAVs generated)
 - [ ] Language comparison logged in EXPERIMENTS.md (oro vs am: intelligibility, name/place errors, listener preference)
 - [ ] Radio cut + user test 1 (3+ people; `outputs/final/radio_cut_am.mp4` rebuilt — 84.8 s, bilingual title & subtitles; user test pending)
-- [x] Reference sheet + keyframes (v3: Ethiopian family-story arc — absent father, remarriage rejection, 3 favored siblings, exhaustion, hidden resilience, fast design talent)
-- [x] Animated Ken Burns + crossfaded film assembly (`film_9x16.mp4` and `film_16x9.mp4`, 87.3 s incl. 2.5s end card, bilingual Amharic+English title/subs; Wan 2.2 & ACE-Step pending)
+- [x] Reference sheet + keyframes (v4 on `ceiling/oromo-and-benchmark`: unified 35mm golden-ochre/emerald look; Odaa tree motif woven continuously across shots `01`, `02`, `06`, `08`, `09`, `10`)
+- [x] Animated Ken Burns + cinematic film assembly (`film_9x16.mp4` and `film_16x9.mp4`, 87.3 s incl. 2.5s end card, unified FFmpeg color grade, `0.65s` `xfade` + `fadeblack` dip before `shot_07`, bilingual Amharic+English title/subs; Wan 2.2 & ACE-Step pending)
 - [ ] Wan 2.2 clips (Kaggle)
 - [ ] ACE-Step candidates (3) + choice
 - [ ] User test 2 (3+ people)

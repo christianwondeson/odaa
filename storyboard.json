@@ -2,7 +2,7 @@
   "title": "Under the Odaa",
   "title_am": "በኦዳ ዛፍ ሥር",
   "logline": "An Ethiopian girl—wounded by an absent father, separated from her mother, and pushed to exhaustion in an unjust remarried household—discovers no one is coming to save her, yet rises as a brilliant student, communicator, and designer.",
-  "style_block": "Cinematic illustrated realism, expressive Ethiopian East African faces, authentic rural Ethiopian highland setting, warm earth palette, deep natural greens, soft golden-hour light, emotionally grounded, single coherent scene, no split screen, no text, no watermark",
+  "style_block": "Cinematic 35mm film still, cohesive painterly realism, consistent warm golden-ochre and deep emerald-green color grading, authentic rural Ethiopian highland light, shallow depth of field, emotionally grounded, single coherent scene, no split screen, no text, no watermark",
   "character_block": "Ethiopian Oromo girl with dark brown East African skin, expressive dark eyes, neat Ethiopian braided hair (shuruba), faded ochre cotton dress with a thin green border",
   "narration": {
     "voice": "Kore",
@@ -42,12 +42,12 @@
   "shots": [
     {
       "id": "01",
-      "reason": "Introduce the Odaa and the seed separated from its shade: early displacement and hidden potential.",
+      "reason": "Link the Ethiopian girl and the Odaa tree from frame one: a small seedling beside her on dry earth beneath its distant shade.",
       "min_seconds": 6,
-      "image_prompt": "Pure botanical nature scene, tree bark and leaves only: a single small green seedling resting alone in cracked dry Ethiopian highland earth far from the shade of a huge Odaa fig tree in the distance, golden hour",
-      "motion_prompt": "slow gentle push toward the lone seedling as grass stirs in evening breeze",
+      "image_prompt": "Wide low-angle shot at golden hour on an Ethiopian highland meadow: the young Ethiopian girl crouching quietly beside a tiny green seedling pushing out of cracked dry earth, looking softly toward the vast mature Odaa fig tree rising in the warm sunlit background, clear expressive Ethiopian face in side-three-quarter profile",
+      "motion_prompt": "slow gentle push-in past the tiny green seedling toward the young girl gazing at the distant Odaa tree",
       "camera": "push_in",
-      "seed": 3001,
+      "seed": 3101,
       "narration": {
         "oro": "Gaaddisa Odaa irraa adda ba'ee, sanyiin tokko lafa goggogaa keessa kophaa bu'e.",
         "en": "Separated from the Odaa's shade, a single seed fell alone into dry earth.",
@@ -55,17 +55,18 @@
       },
       "music_cue": "soft solo plucked krar-like string enters",
       "refs": [
+        "ref_girl",
         "ref_odaa"
       ]
     },
     {
       "id": "02",
-      "reason": "Establish the root wound: absent father, separation from mother, and learning to please others to survive.",
+      "reason": "Establish the root wound: absent father, separation from mother, and learning to please others to survive, with the Odaa on the horizon.",
       "min_seconds": 8,
-      "image_prompt": "Medium close portrait of the Ethiopian girl standing near a weathered wooden doorway looking quietly out at an empty highland path at dusk, clear view of her lonely expressive Ethiopian face and dark eyes, empty stool beside her symbolizing an absent parent",
-      "motion_prompt": "slight breeze moves her dress as she looks down quietly",
-      "camera": "push_in",
-      "seed": 3002,
+      "image_prompt": "Medium close shot of the Ethiopian girl standing in a weathered wooden doorway looking out toward an empty highland path and the distant Odaa tree silhouette at dusk, clear view of her lonely expressive Ethiopian face and dark eyes, empty wooden stool beside her",
+      "motion_prompt": "slow pull back from her lonely face to reveal the empty doorway and distant Odaa tree",
+      "camera": "pull_back",
+      "seed": 3102,
       "narration": {
         "oro": "Ijoollummaa isheetti jaalala abbaa dhabde; haadha irraa fagaachuunis onnee ishee madeesse. Nama hunda gammachiisuuf of dagachuu jalqabde.",
         "en": "Growing up without a father beside her—and separated from her mother—she learned to shrink herself just to please everyone around her.",
@@ -132,12 +133,12 @@
     },
     {
       "id": "06",
-      "reason": "The darkest truth: realizing life is cruel and nobody is coming to rescue her.",
+      "reason": "Her darkest moment under the Odaa roots: realizing no one is coming to save her, drawing quiet resolve from the tree.",
       "min_seconds": 7,
-      "image_prompt": "Close medium shot in a dim traditional Ethiopian earthen corner at dusk: the Ethiopian girl sitting curled hugging her knees against a mud wall, clear close view of her glistening determined Ethiopian eyes looking forward out of the shadows, deep quiet resolve",
-      "motion_prompt": "shadow shifts slowly, she blinks away a tear and lifts her head with resolve",
+      "image_prompt": "Close medium shot at twilight beneath the gnarled roots and dark canopy of the great Odaa fig tree: the Ethiopian girl sitting curled hugging her knees with her worn blue notebook tucked beside her against the Odaa trunk, clear close view of her glistening determined Ethiopian eyes looking forward out of deep shadow",
+      "motion_prompt": "slow push-in toward her determined eyes against the Odaa roots as twilight settles",
       "camera": "push_in",
-      "seed": 3006,
+      "seed": 3106,
       "narration": {
         "oro": "Rakkina hamtuu san keessatti addunyaan gara-jabeettii ta'uu barte; eenyullee dhufee akka ishee hin baraarres hubatte.",
         "en": "In those life-crushing days, she realized how cruel the world could be—and that no one was coming to save her.",
@@ -145,17 +146,18 @@
       },
       "music_cue": "music drops to a single sustained tone",
       "refs": [
-        "ref_girl"
+        "ref_girl",
+        "ref_odaa"
       ]
     },
     {
       "id": "07",
       "reason": "The turning point: full of life, excelling at school, communicating vividly, and sketching fast designs.",
       "min_seconds": 9,
-      "image_prompt": "Medium shot in a sunlit rural Ethiopian classroom with plastered mud walls and wooden desks: our Ethiopian girl standing vibrantly with a bright lively smile on her clear Ethiopian face, speaking eagerly with expressive hands while holding open a worn blue notebook filled with intricate clothing and pattern sketches, Ethiopian classmates listening warmly",
-      "motion_prompt": "sunlight warms the room as she gestures enthusiastically over her design notebook",
+      "image_prompt": "Medium shot in a sunlit rural Ethiopian classroom with warm earthen plaster walls and wooden desks: our Ethiopian girl standing vibrantly with a bright lively smile on her clear Ethiopian face, speaking joyfully while holding open her worn blue notebook in both hands filled with intricate Ethiopian dress and pattern sketches, Ethiopian classmates listening warmly",
+      "motion_prompt": "sunlight warms the room as camera pans across her lively face and design notebook",
       "camera": "pan_right",
-      "seed": 3007,
+      "seed": 3107,
       "narration": {
         "oro": "Garuu intalli du'aaf dhiifamte sun hin mo'amne. Barattuu cimaa, dubbattuu gaarii, jireenyaan guutamtuu fi dizaayinii saffisaan hojjettu taatee baate.",
         "en": "Yet the child pushed toward ruin refused to fade. She became a brilliant student, a vivid speaker full of life, and swift with her hands in design.",
@@ -168,12 +170,12 @@
     },
     {
       "id": "08",
-      "reason": "Visual metaphor: roots growing deep beneath heavy stone.",
+      "reason": "Match-cut growth bridge: deep Odaa roots thriving beside her worn blue design sketchbook as time passes.",
       "min_seconds": 5,
-      "image_prompt": "Pure botanical nature scene, no people: painterly cross-section of thick Odaa fig tree roots pushing past heavy rocks through dark Ethiopian soil while clear rainwater nourishes them, golden light above",
-      "motion_prompt": "slow downward drift as water glimmers along deep roots",
-      "camera": "pan_down",
-      "seed": 3008,
+      "image_prompt": "Cinematic close-up at golden sunrise at the base of the great Odaa fig tree: thick weathered Odaa roots drinking rainwater out of rich dark Ethiopian soil beside a thriving young green sapling and the girl's worn blue sketchbook resting cleanly on a root, warm sunlight shafts through leaves, no people",
+      "motion_prompt": "slow upward pan from the deep watered Odaa roots and blue sketchbook toward golden sunrise light",
+      "camera": "pan_up",
+      "seed": 3108,
       "narration": {
         "oro": "Dhiibbaa jalaa hiddishee dhokatee ture bishaan argatee gadi fagaatee cimaa deeme.",
         "en": "Beneath the hardest stone, her hidden roots drank deep and held fast.",
@@ -186,12 +188,12 @@
     },
     {
       "id": "09",
-      "reason": "Adulthood: an independent Ethiopian woman leading her own design craft with voice and dignity.",
+      "reason": "Adulthood: an independent Ethiopian woman leading her own design craft with the Odaa tree framed outside her workshop.",
       "min_seconds": 8,
-      "image_prompt": "Medium shot in a bright Ethiopian craft and fashion studio: the adult Ethiopian Oromo woman standing proudly beside a wooden worktable draped with vibrant Ethiopian handwoven textiles, holding her open blue design sketchbook and speaking warmly with confident grace, clear dignified Ethiopian face in golden morning light",
-      "motion_prompt": "she smiles warmly and turns a page in her sketchbook as morning sunbeams drift",
+      "image_prompt": "Medium cinematic shot in an Ethiopian textile and fashion studio with a wide open wooden window framing the great Odaa tree outside in golden morning light: the adult Ethiopian Oromo woman standing proudly beside a wooden worktable draped with colorful Ethiopian handwoven textiles, holding her open blue design sketchbook and speaking warmly with confident grace, clear dignified Ethiopian face",
+      "motion_prompt": "slow pan left across her woven textiles and sketchbook as warm sunlight streams from the Odaa window",
       "camera": "pan_left",
-      "seed": 3009,
+      "seed": 3109,
       "narration": {
         "oro": "Har'a hojii dizaayinii ofiishee geggeessitu, sagaleenshee dhaga'amuu fi of kabajju dubartii cimaa taateetti.",
         "en": "Today she leads her own design craft—speaking with clarity, standing in dignity, no longer erasing herself to be loved.",
@@ -199,7 +201,8 @@
       },
       "music_cue": "uplifting main theme in full warmth",
       "refs": [
-        "ref_woman"
+        "ref_woman",
+        "ref_odaa"
       ]
     },
     {
