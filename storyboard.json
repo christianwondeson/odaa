@@ -1,0 +1,217 @@
+{
+  "title": "Under the Odaa",
+  "logline": "A girl overlooked in her own home discovers her worth was never measured by how much she gives.",
+  "style_block": "Cinematic illustrated realism, painterly but anatomically believable, rural Oromo highland setting, warm earth palette, deep natural greens, soft golden-hour light, emotionally restrained, no text, no watermark",
+  "character_block": "Fictional Oromo girl about 11, one practical braided hairstyle, faded ochre cotton dress with a thin green border, bare feet, carries a small worn blue notebook",
+  "narration": {
+    "voice": "Kore",
+    "style_instruction": "Calm, warm, unhurried, intimate",
+    "languages": {
+      "oro": {
+        "name": "Afaan Oromoo",
+        "reviewed": false
+      },
+      "am": {
+        "name": "Amharic",
+        "reviewed": false
+      }
+    }
+  },
+  "references": [
+    {
+      "id": "ref_girl",
+      "prompt": "Character reference sheet of Fictional Oromo girl about 11, one practical braided hairstyle, faded ochre cotton dress with a thin green border, bare feet, carries a small worn blue notebook: front view, side view, back view, neutral background",
+      "seed": 42
+    },
+    {
+      "id": "ref_odaa",
+      "prompt": "Environment reference: a vast mature Odaa fig tree on a highland meadow at golden hour",
+      "seed": 43
+    }
+  ],
+  "end_card": {
+    "text": "Made with AI. A fictional story inspired by real life.",
+    "seconds": 3
+  },
+  "shots": [
+    {
+      "id": "01",
+      "reason": "Introduce the Odaa and the seed: potential nobody notices.",
+      "min_seconds": 7,
+      "image_prompt": "A tiny green seedling pushing out of a crack in dry earth at the foot of a huge old fig tree, wide low angle, centered subject",
+      "motion_prompt": "slow gentle push toward the seedling, leaves stir in light wind",
+      "camera": "push_in",
+      "seed": 1001,
+      "narration": {
+        "oro": "Muka Odaa jalatti, sanyiin tokko callisee biqila.",
+        "en": "Beneath the Odaa tree, a seed quietly begins to grow.",
+        "am": "በኦዳ ዛፍ ሥር፣ አንድ ዘር በጸጥታ ማደግ ጀመረ።"
+      },
+      "music_cue": "soft solo plucked string enters",
+      "refs": [
+        "ref_odaa"
+      ]
+    },
+    {
+      "id": "02",
+      "reason": "Establish the girl and her longing, seen from behind to keep identity safe.",
+      "min_seconds": 8,
+      "image_prompt": "the girl seen from behind sitting on a doorstep at dusk, looking toward a distant empty path, centered",
+      "motion_prompt": "slight breeze moves her dress, camera nearly static",
+      "camera": "static",
+      "seed": 1002,
+      "narration": {
+        "oro": "Intalli tokko yeroo tokko, jaalala barbaaddi turte. Garuu mana keessatti, yeroo baay'ee hojii ishee qofa argan.",
+        "en": "There was once a girl who longed for love. But at home, people often noticed only the work she did.",
+        "am": "ፍቅርን የምትናፍቅ አንዲት ልጅ ነበረች። ግን በቤት ውስጥ ሰዎች የሚያዩት ሥራዋን ብቻ ነበር።"
+      },
+      "music_cue": "warm pad, sparse",
+      "refs": [
+        "ref_girl"
+      ]
+    },
+    {
+      "id": "03",
+      "reason": "Unequal responsibility, told through hands only.",
+      "min_seconds": 7,
+      "image_prompt": "Close-up of a child's hands washing a smaller child's hair over a clay basin, warm light, no faces",
+      "motion_prompt": "water pours slowly, hands move gently",
+      "camera": "static",
+      "seed": 1003,
+      "narration": {
+        "oro": "Ijoollee kaan kunuunsiti. Hojii mana keessaa baatti.",
+        "en": "She cared for the other children. She carried the household chores.",
+        "am": "ሌሎቹን ልጆች ትንከባከባለች። የቤቱን ሥራ ሁሉ ትሸከማለች።"
+      },
+      "music_cue": "music holds, slight tension",
+      "refs": [
+        "ref_girl"
+      ]
+    },
+    {
+      "id": "04",
+      "reason": "Emotional absence shown through an empty doorway, not through violence.",
+      "min_seconds": 6,
+      "image_prompt": "An empty doorway of a mud-walled house, a single stool, long late shadow on the floor, nobody in frame",
+      "motion_prompt": "dust drifts in the light",
+      "camera": "pan_right",
+      "seed": 1004,
+      "narration": {
+        "oro": "Garuu eenyutu ishee gaafata, \"Ati hoo akkam jirta?\"",
+        "en": "But who ever asked her, \"And how are you?\"",
+        "am": "ግን «አንቺስ እንዴት ነሽ?» ብሎ የጠየቃት ማን ነበር?"
+      },
+      "music_cue": "music thins to near silence"
+    },
+    {
+      "id": "05",
+      "reason": "Her private imagination: the notebook at night.",
+      "min_seconds": 9,
+      "image_prompt": "the girl hands only, drawing patterns in a small blue notebook by oil-lamp light, night, warm glow",
+      "motion_prompt": "pencil moves across the page",
+      "camera": "push_in",
+      "seed": 1005,
+      "narration": {
+        "oro": "Halkan tokko tokko, yeroo namoonni hundi rafan, isheen kitaaba ishee bantee ni barreessiti. Yaadni ishee guddaa ture. Abjuun ishee immoo caalaatti guddaa ture.",
+        "en": "Some nights, when everyone slept, she opened her notebook and drew. Her imagination was vast. Her dreams were even bigger.",
+        "am": "አንዳንድ ሌሊት፣ ሁሉም ሲተኙ፣ ደብተሯን ከፍታ ትስል ነበር። ምናቧ ሰፊ ነበር። ሕልሟ ደግሞ የበለጠ ትልቅ ነበር።"
+      },
+      "music_cue": "gentle melody emerges",
+      "refs": [
+        "ref_girl"
+      ]
+    },
+    {
+      "id": "06",
+      "reason": "At school her talent becomes visible.",
+      "min_seconds": 9,
+      "image_prompt": "the girl at a wooden school desk, a raised hand, a teacher's hand holding out a marked paper, bright classroom, medium shot",
+      "motion_prompt": "paper is handed over, slight smile",
+      "camera": "push_in",
+      "seed": 1006,
+      "narration": {
+        "oro": "Mana barumsaa keessatti, dandeettiin ishee ifa ba'e. Harka ishee keessatti, fakkiiwwan, halluuwwanii fi yaadawwan haaraan dhalatan.",
+        "en": "At school, her talent began to shine. In her hands, new pictures, colours and ideas came to life.",
+        "am": "በትምህርት ቤት ችሎታዋ ማብራት ጀመረ። በእጆቿ አዳዲስ ሥዕሎች፣ ቀለሞችና ሐሳቦች ሕያው ሆኑ።"
+      },
+      "music_cue": "melody grows, brighter",
+      "refs": [
+        "ref_girl"
+      ]
+    },
+    {
+      "id": "07",
+      "reason": "Match the invisible growth of roots to the girl's growth.",
+      "min_seconds": 5,
+      "image_prompt": "Cross-section view of Odaa roots spreading wide under warm soil, a thin line of water reaching them, painterly",
+      "motion_prompt": "roots glow subtly, slow downward drift",
+      "camera": "pull_back",
+      "seed": 1007,
+      "narration": {
+        "oro": "Yeroon darbe.",
+        "en": "Time passed.",
+        "am": "ጊዜ አለፈ።"
+      },
+      "music_cue": "strings swell softly",
+      "refs": [
+        "ref_odaa"
+      ]
+    },
+    {
+      "id": "08",
+      "reason": "Childhood to adulthood: the same hands, older.",
+      "min_seconds": 9,
+      "image_prompt": "Adult woman's hands, same ochre sleeve border, drawing in the worn blue notebook, same lamp, morning light now",
+      "motion_prompt": "pages turn, hand continues drawing",
+      "camera": "static",
+      "seed": 1008,
+      "narration": {
+        "oro": "Intalli sun guddatte. Garuu waan tokko baratte: nama biraa jaallachuun, of dagachuu jechuu miti.",
+        "en": "The girl grew up. But she learned something: loving others does not mean forgetting yourself.",
+        "am": "ልጅቷ አደገች። ግን አንድ ነገር ተማረች፦ ሌሎችን መውደድ ራስን መርሳት ማለት አይደለም።"
+      },
+      "music_cue": "theme returns",
+      "refs": [
+        "ref_girl"
+      ]
+    },
+    {
+      "id": "09",
+      "reason": "She chooses to care for herself: motif reframed.",
+      "min_seconds": 8,
+      "image_prompt": "Adult woman sitting in the shade of the Odaa, resting, cup of coffee in her own hands, seen from the side",
+      "motion_prompt": "leaves move in the shade, she exhales",
+      "camera": "pan_left",
+      "seed": 1009,
+      "narration": {
+        "oro": "Muka Odaa akkuma gaaddisa kennu, isheenis ofii ishee kunuunsuu baratte.",
+        "en": "Like the Odaa tree offering shade, she learned to care for herself, too.",
+        "am": "የኦዳ ዛፍ ጥላ እንደሚሰጥ ሁሉ፣ እሷም ራሷን መንከባከብን ተማረች።"
+      },
+      "music_cue": "warm sustained chord",
+      "refs": [
+        "ref_girl",
+        "ref_odaa"
+      ]
+    },
+    {
+      "id": "10",
+      "reason": "Ending image and message: shelter, belonging, gentle washing of a child's hair under the canopy.",
+      "min_seconds": 10,
+      "image_prompt": "Wide view of the mature Odaa canopy with a woman and a small child sitting beneath it, golden hour, centered",
+      "motion_prompt": "slow pull back revealing the full canopy",
+      "camera": "pull_back",
+      "seed": 1010,
+      "narration": {
+        "oro": "Gatiin ishee waan kennituun hin madaalamu. Isheen nama guutuu dha. Isheen kunuunsa, jaalalaafi kabaja argachuu qabdi.",
+        "en": "Her worth is not measured by what she gives. She is a whole person. She deserves care, love and respect.",
+        "am": "ዋጋዋ በምትሰጠው አይለካም። ሙሉ ሰው ናት። እንክብካቤ፣ ፍቅርና ክብር ይገባታል።"
+      },
+      "music_cue": "theme resolves, fade out",
+      "refs": [
+        "ref_girl",
+        "ref_odaa"
+      ]
+    }
+  ]
+}

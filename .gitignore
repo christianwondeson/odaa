@@ -1,0 +1,11 @@
+.env
+outputs/work/
+outputs/smoke/
+outputs/.cache.json
+outputs/keyframes/*_512.jpg
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+Thumbs.db
+

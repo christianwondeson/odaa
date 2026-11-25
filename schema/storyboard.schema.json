@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Under the Odaa storyboard",
+  "type": "object",
+  "required": [
+    "title",
+    "style_block",
+    "character_block",
+    "references",
+    "narration",
+    "shots",
+    "end_card"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "logline": {
+      "type": "string"
+    },
+    "style_block": {
+      "type": "string",
+      "minLength": 20
+    },
+    "character_block": {
+      "type": "string",
+      "minLength": 20
+    },
+    "narration": {
+      "type": "object",
+      "required": [
+        "voice",
+        "style_instruction",
+        "languages"
+      ],
+      "properties": {
+        "voice": {
+          "type": "string"
+        },
+        "style_instruction": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "object"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "prompt",
+          "seed"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "seed": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "end_card": {
+      "type": "object",
+      "required": [
+        "text",
+        "seconds"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 2,
+          "maximum": 4
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "reason",
+          "min_seconds",
+          "image_prompt",
+          "motion_prompt",
+          "camera",
+          "seed",
+          "narration",
+          "music_cue"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9]{2}$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 10
+          },
+          "min_seconds": {
+            "type": "number",
+            "minimum": 3,
+            "maximum": 12
+          },
+          "image_prompt": {
+            "type": "string",
+            "minLength": 10
+          },
+          "motion_prompt": {
+            "type": "string"
+          },
+          "camera": {
+            "enum": [
+              "push_in",
+              "pull_back",
+              "pan_left",
+              "pan_right",
+              "static"
+            ]
+          },
+          "seed": {
+            "type": "integer"
+          },
+          "narration": {
+            "type": "object",
+            "required": [
+              "oro",
+              "en"
+            ],
+            "properties": {
+              "oro": {
+                "type": "string"
+              },
+              "en": {
+                "type": "string"
+              },
+              "am": {
+                "type": "string"
+              }
+            }
+          },
+          "music_cue": {
+            "type": "string"
+          },
+          "refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

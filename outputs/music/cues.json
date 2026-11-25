@@ -1,0 +1,62 @@
+[
+ {
+  "shot": "01",
+  "start": 0.0,
+  "end": 7.0,
+  "cue": "soft solo plucked string enters"
+ },
+ {
+  "shot": "02",
+  "start": 7.0,
+  "end": 16.08,
+  "cue": "warm pad, sparse"
+ },
+ {
+  "shot": "03",
+  "start": 16.08,
+  "end": 23.08,
+  "cue": "music holds, slight tension"
+ },
+ {
+  "shot": "04",
+  "start": 23.08,
+  "end": 29.08,
+  "cue": "music thins to near silence"
+ },
+ {
+  "shot": "05",
+  "start": 29.08,
+  "end": 40.29,
+  "cue": "gentle melody emerges"
+ },
+ {
+  "shot": "06",
+  "start": 40.29,
+  "end": 50.15,
+  "cue": "melody grows, brighter"
+ },
+ {
+  "shot": "07",
+  "start": 50.15,
+  "end": 55.15,
+  "cue": "strings swell softly"
+ },
+ {
+  "shot": "08",
+  "start": 55.15,
+  "end": 64.15,
+  "cue": "theme returns"
+ },
+ {
+  "shot": "09",
+  "start": 64.15,
+  "end": 72.15,
+  "cue": "warm sustained chord"
+ },
+ {
+  "shot": "10",
+  "start": 72.15,
+  "end": 82.15,
+  "cue": "theme resolves, fade out"
+ }
+]
