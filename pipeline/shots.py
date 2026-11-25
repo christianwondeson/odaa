@@ -10,20 +10,50 @@ def fhash(p):
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12] if p.exists() else "none"
 
 def kb_filter(camera, W, H, frames):
-    z = {"push_in": "min(1+0.0006*on,1.2)", "pull_back": "max(1.2-0.0006*on,1.0)",
-         "pan_left": "1.15", "pan_right": "1.15", "static": "1.04"}[camera]
-    x = {"pan_left": f"(iw-iw/zoom)*(1-on/{frames})", "pan_right": f"(iw-iw/zoom)*on/{frames}"}.get(camera, "iw/2-iw/zoom/2")
-    return (f"scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},"
-            f"zoompan=z='{z}':x='{x}':y='ih/2-ih/zoom/2':d={frames}:s={W}x{H}:fps={FPS},format=yuv420p")
+    # Smooth eased progress e in [0, 1] and 3x oversampling avoid zoompan pixel jitter.
+    e = f"0.5*(1-cos(PI*min(on/{frames},1)))"
+    z = {
+        "push_in": f"1+0.18*({e})",
+        "pull_back": f"1.18-0.18*({e})",
+        "pan_left": "1.14",
+        "pan_right": "1.14",
+        "pan_up": "1.14",
+        "pan_down": "1.14",
+        "static": f"1.02+0.04*({e})",
+    }[camera]
+    x = {
+        "pan_left": f"(iw-iw/zoom)*(1-({e}))",
+        "pan_right": f"(iw-iw/zoom)*({e})",
+    }.get(camera, "iw/2-iw/zoom/2")
+    y = {
+        "pan_up": f"(ih-ih/zoom)*(1-({e}))",
+        "pan_down": f"(ih-ih/zoom)*({e})",
+    }.get(camera, "ih/2-ih/zoom/2")
+    return (f"scale={W*3}:{H*3}:force_original_aspect_ratio=increase,crop={W*3}:{H*3},"
+            f"zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={W}x{H}:fps={FPS},"
+            f"vignette=PI/7,format=yuv420p")
 
 def main(only=None):
+    load_env()
     sb = load_storyboard()
     (OUT / "shots").mkdir(parents=True, exist_ok=True)
+    use_ws = bool(os.environ.get("WAVESPEED_API_KEY")) and os.environ.get("ENABLE_WAVESPEED") == "1"
     for s in sb["shots"]:
         if only and s["id"] != only: continue
         dur = shot_seconds(s)
         key = OUT / "keyframes" / f"shot_{s['id']}.jpg"
         wan = OUT / "wan" / f"shot_{s['id']}.mp4"
+        if use_ws and not wan.exists() and key.exists():
+            from pipeline.providers import wavespeed_wan_i2v
+            wan.parent.mkdir(parents=True, exist_ok=True)
+            t_ws = time.time()
+            try:
+                wan.write_bytes(wavespeed_wan_i2v(key, s["motion_prompt"], s["seed"], dur))
+                log_run("wan", "wavespeed/wan-2.2-i2v-480p-ultra-fast", s["id"], {"dur": dur}, s["seed"], time.time() - t_ws, 0.05)
+                print(f"shot {s['id']}: generated wan clip via WaveSpeed")
+            except Exception as e:
+                log_run("wan", "wavespeed/wan-2.2-i2v-480p-ultra-fast", s["id"], {"dur": dur}, s["seed"], time.time() - t_ws, 0, "error", str(e)[:200])
+                print(f"shot {s['id']}: WaveSpeed failed ({e}); falling back to Ken Burns")
         src = "wan" if wan.exists() else "kenburns"
         if src == "kenburns" and not key.exists():
             print(f"shot {s['id']}: no keyframe yet, skipping"); continue

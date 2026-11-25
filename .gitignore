@@ -1,6 +1,8 @@
 .env
 outputs/work/
 outputs/smoke/
+outputs/shots/
+outputs/final/
 outputs/.cache.json
 outputs/keyframes/*_512.jpg
 __pycache__/

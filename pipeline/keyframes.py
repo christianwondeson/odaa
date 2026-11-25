@@ -16,11 +16,24 @@ def main(only=None):
     W, H = int(os.environ.get("IMG_W", 1024)), int(os.environ.get("IMG_H", 1024))
     (OUT / "keyframes").mkdir(parents=True, exist_ok=True)
     jobs = [(r["id"], r["prompt"], r["seed"], []) for r in sb["references"]]
+    ref_notes = {
+        "ref_girl": "keep this exact Ethiopian girl's face, dark brown skin, braids, and ochre-green dress",
+        "ref_woman": "keep this exact adult Ethiopian woman's face, dark brown skin, braids, netela shawl, and ochre-green dress",
+        "ref_odaa": "match this Odaa fig tree and Ethiopian highland lighting",
+    }
     for s in sb["shots"]:
-        p = f"{sb['style_block']}. {sb['character_block']}. {s['image_prompt']}"
-        if s.get("refs"):
-            p = "Image 0 is the approved character/style reference; keep the same person and look. " + p
-        jobs.append((f"shot_{s['id']}", p, s["seed"], s.get("refs", [])))
+        refs = s.get("refs", [])
+        has_person = "ref_girl" in refs or "ref_woman" in refs
+        style = sb["style_block"] if has_person else sb["style_block"].replace("expressive Ethiopian East African faces, ", "")
+        parts = [style]
+        if "ref_girl" in refs and "ref_woman" not in refs:
+            parts.append(sb["character_block"])
+        parts.append(s["image_prompt"])
+        p = ". ".join(parts)
+        if refs:
+            desc = "; ".join(f"Image {i} ({ref_notes.get(r, r)})" for i, r in enumerate(refs))
+            p = f"Use the visual references: {desc}. " + p
+        jobs.append((f"shot_{s['id']}", p, s["seed"], refs))
     for name, prompt, seed, refs in jobs:
         if only and name != only: continue
         paths = [small_ref(r) for r in refs if (OUT / "keyframes" / f"{r}.jpg").exists()]

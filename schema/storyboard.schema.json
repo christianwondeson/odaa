@@ -15,6 +15,9 @@
     "title": {
       "type": "string"
     },
+    "title_am": {
+      "type": "string"
+    },
     "logline": {
       "type": "string"
     },
@@ -129,6 +132,8 @@
               "pull_back",
               "pan_left",
               "pan_right",
+              "pan_up",
+              "pan_down",
               "static"
             ]
           },

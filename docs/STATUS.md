@@ -5,8 +5,9 @@
 - [ ] Afaan Oromoo TTS reviewed by a native speaker
 - [ ] Amharic TTS reviewed by a native speaker (Amharic lines are an UNVERIFIED draft; 10/10 WAVs generated)
 - [ ] Language comparison logged in EXPERIMENTS.md (oro vs am: intelligibility, name/place errors, listener preference)
-- [ ] Radio cut + user test 1 (3+ people; WAV preview stitched, MP4 blocked on local `ffmpeg`)
-- [x] Reference sheet + keyframes (`ref_girl`, `ref_odaa`, and `shot_01`–`shot_10` generated via FLUX.2 klein 4B)
+- [ ] Radio cut + user test 1 (3+ people; `outputs/final/radio_cut_am.mp4` rebuilt — 84.8 s, bilingual title & subtitles; user test pending)
+- [x] Reference sheet + keyframes (v3: Ethiopian family-story arc — absent father, remarriage rejection, 3 favored siblings, exhaustion, hidden resilience, fast design talent)
+- [x] Animated Ken Burns + crossfaded film assembly (`film_9x16.mp4` and `film_16x9.mp4`, 87.3 s incl. 2.5s end card, bilingual Amharic+English title/subs; Wan 2.2 & ACE-Step pending)
 - [ ] Wan 2.2 clips (Kaggle)
 - [ ] ACE-Step candidates (3) + choice
 - [ ] User test 2 (3+ people)

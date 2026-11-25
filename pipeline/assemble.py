@@ -1,8 +1,15 @@
-"""Stage: assembly. Narration track timed to shots, music ducked under voice, subtitles, loudness, end card, 2 aspects.
-`python -m pipeline.assemble radio` builds the radio cut (narration + placeholder music on black)."""
+"""Stage: assembly. Narration timed to shots, music ducked under voice, bilingual Amharic+English
+title and subtitles, loudness normalization, bilingual AI end card, and 9:16 + 16:9 exports.
+`python -m pipeline.assemble radio` builds the subtitled radio cut."""
 import sys, textwrap, time
 from pipeline.common import *
 from pipeline.shots import ASPECTS
+
+FONT = "Ebrima"  # Includes crisp Ethiopic (Ge'ez) and Latin glyphs on Windows
+
+def ff_path(p):
+    """Escape a path for FFmpeg filter options (handles Windows drive colons and spaces)."""
+    return "'" + p.resolve().as_posix().replace("\\", "/").replace(":", r"\:") + "'"
 
 def srt_time(t):
     h, m, s = int(t // 3600), int(t % 3600 // 60), t % 60
@@ -13,13 +20,30 @@ def write_srt(path, cues):
         for i, (a, b, txt) in enumerate(cues, 1):
             f.write(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{txt}\n\n")
 
+def build_bilingual_cues(sb, durs, width):
+    """Build (start, end, Amharic + English) subtitle cues timed to each shot."""
+    cues, t = [], 0.0
+    for s, d in zip(sb["shots"], durs):
+        am = "\n".join(textwrap.wrap(s["narration"].get("am", "").strip(), width))
+        en = "\n".join(textwrap.wrap(s["narration"]["en"].strip(), width))
+        txt = f"{am}\n{en}" if am else en
+        cues.append((t + 0.15, t + d - 0.15, txt))
+        t += d
+    return cues
+
+def title_text(sb):
+    am = sb.get("title_am", "").strip()
+    return f"{sb['title']}\n{am}" if am else sb["title"]
+
 def narration_track(sb, work):
-    parts, t = [], 0.0
+    parts = []
     for s in sb["shots"]:
         d = shot_seconds(s); p = work / f"n_{s['id']}.wav"
-        wav = OUT / "narration" / LANG() / f"shot_{s['id']}.wav"
-        if wav.exists():
-            ff(["-i", str(wav), "-af", f"apad=whole_dur={d}", "-ar", "48000", "-ac", "1", str(p)])
+        aud = narration_audio_path(s["id"])
+        tempo = narration_tempo(s["id"])
+        if aud.exists():
+            af = f"atempo={tempo},apad=whole_dur={d}" if abs(tempo - 1.0) > 1e-3 else f"apad=whole_dur={d}"
+            ff(["-i", str(aud), "-af", af, "-ar", "48000", "-ac", "1", str(p)])
         else:
             ff(["-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono", "-t", str(d), str(p)])
         parts.append(p)
@@ -30,12 +54,12 @@ def narration_track(sb, work):
 
 def music_track(total, work):
     chosen = OUT / "music" / "chosen.wav"; out = work / "music_total.wav"
-    fade = f"afade=t=out:st={max(total-3,0)}:d=3"
+    fade = f"afade=t=in:st=0:d=1.2,afade=t=out:st={max(total-3,0)}:d=3"
     if chosen.exists():
         ff(["-stream_loop", "-1", "-i", str(chosen), "-t", str(total), "-af", f"{fade},aresample=48000", "-ac", "2", str(out)])
         return out, "chosen"
     ff(["-f", "lavfi", "-i", "sine=f=196:d=%s" % total, "-f", "lavfi", "-i", "sine=f=294:d=%s" % total,
-        "-filter_complex", f"[0][1]amix=inputs=2,volume=0.25,{fade}", "-ar", "48000", "-ac", "2", str(out)])
+        "-filter_complex", f"[0][1]amix=inputs=2,lowpass=f=650,volume=0.14,{fade}", "-ar", "48000", "-ac", "2", str(out)])
     return out, "placeholder"
 
 def mix(nar, music, total, out):
@@ -52,28 +76,59 @@ def main(mode="film"):
     nar = narration_track(sb, work); nar_ext = work / "narration_ext.wav"
     ff(["-i", str(nar), "-af", f"apad=whole_dur={total}", str(nar_ext)])
     music, kind = music_track(total, work); audio = work / "mix.wav"; mix(nar_ext, music, total, audio)
+    write_srt(work / "title.srt", [(0.15, min(4.5, body - 0.2), title_text(sb))])
     if mode == "radio":
-        ff(["-f", "lavfi", "-i", f"color=c=black:s=640x360:r=24:d={total}", "-i", str(audio), "-c:v", "libx264", "-c:a", "aac", "-shortest", str(OUT / "final" / f"radio_cut_{LANG()}.mp4")])
+        write_srt(work / "subs_radio.srt", build_bilingual_cues(sb, durs, 42))
+        vf = (f"subtitles={ff_path(work/'title.srt')}:force_style='FontName={FONT},Alignment=6,Fontsize=14,Outline=2,MarginV=16',"
+              f"subtitles={ff_path(work/'subs_radio.srt')}:force_style='FontName={FONT},Alignment=2,Fontsize=11,Outline=2,MarginV=14'")
+        ff(["-f", "lavfi", "-i", f"color=c=0x101010:s=640x360:r=24:d={total}", "-i", str(audio),
+            "-vf", vf, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest",
+            str(OUT / "final" / f"radio_cut_{LANG()}.mp4")])
         log_run("assemble", "ffmpeg", None, {"mode": "radio", "music": kind, "seconds": total}, None, time.time() - t0)
         print(f"radio cut: {total:.1f}s (music: {kind})"); return
-    cues, t = [], 0.0
-    for s, d in zip(sb["shots"], durs):
-        cues.append((t + 0.2, t + d - 0.2, "\n".join(textwrap.wrap(s["narration"]["en"], 40)))); t += d
-    write_srt(work / "subs.srt", cues); write_srt(work / "end.srt", [(body + 0.3, total - 0.2, sb["end_card"]["text"])])
+    write_srt(work / "end.srt", [(body + 0.3, total - 0.2, sb["end_card"]["text"])])
+    fade_d = 0.45
     for asp, (W, H) in ASPECTS.items():
         clips = [OUT / "shots" / f"shot_{s['id']}_{asp}.mp4" for s in sb["shots"]]
         missing = [c.name for c in clips if not c.exists()]
         if missing: raise SystemExit(f"missing shot clips (run keyframes + shots first): {missing[:3]}...")
+        srt_p = work / f"subs_{asp}.srt"
+        write_srt(srt_p, build_bilingual_cues(sb, durs, 32 if asp == "9x16" else 44))
         endclip = work / f"end_{asp}.mp4"
         ff(["-f", "lavfi", "-i", f"color=c=0x101010:s={W}x{H}:r=24:d={end}", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(endclip)])
-        lst = work / f"v_{asp}.txt"; lst.write_text("".join(f"file '{c.resolve()}'\n" for c in clips + [endclip]))
+        # Pad each clip tail by fade_d before xfade so every shot transition stays synced to narration.
+        all_clips = clips + [endclip]
+        clip_durs = durs + [end]
+        inputs = []
+        for c in all_clips:
+            inputs += ["-i", str(c)]
+        fc_parts = []
+        for idx, cd in enumerate(clip_durs):
+            pad = f",tpad=stop_mode=clone:stop_duration={fade_d}" if idx < len(all_clips) - 1 else ""
+            fc_parts.append(f"[{idx}:v]setpts=PTS-STARTPTS,fps=24,format=yuv420p{pad}[v{idx}]")
+        cur = "v0"
+        offset = 0.0
+        for idx in range(len(all_clips) - 1):
+            offset += clip_durs[idx]
+            nxt = f"v{idx+1}"
+            out_lbl = f"xf{idx}"
+            fc_parts.append(f"[{cur}][{nxt}]xfade=transition=fade:duration={fade_d}:offset={offset:.3f}[{out_lbl}]")
+            cur = out_lbl
         # libass sizes fonts on a 288px-high virtual canvas, not real pixels
-        fs, es = (9, 14) if asp == "9x16" else (13, 18); mv = 38 if asp == "9x16" else 18
-        vf = (f"subtitles={work/'subs.srt'}:force_style='Fontsize={fs},Outline=2,MarginV={mv}',"
-              f"subtitles={work/'end.srt'}:force_style='Alignment=10,Fontsize={es}'")
+        fs, ts, es = (8, 12, 11) if asp == "9x16" else (11, 16, 15)
+        mv, tmv = (34, 24) if asp == "9x16" else (16, 14)
+        fc_parts.append(
+            f"[{cur}]fade=t=in:st=0:d=0.6,"
+            f"subtitles={ff_path(work/'title.srt')}:force_style='FontName={FONT},Alignment=6,Fontsize={ts},Outline=2,MarginV={tmv}',"
+            f"subtitles={ff_path(srt_p)}:force_style='FontName={FONT},Alignment=2,Fontsize={fs},Outline=2,MarginV={mv}',"
+            f"subtitles={ff_path(work/'end.srt')}:force_style='FontName={FONT},Alignment=10,Fontsize={es},Outline=2'[vout]"
+        )
         out = OUT / "final" / f"film_{asp}.mp4"
-        ff(["-f", "concat", "-safe", "0", "-i", str(lst), "-i", str(audio), "-vf", vf, "-map", "0:v", "-map", "1:a",
-            "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "24", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)])
+        a_idx = len(all_clips)
+        ff(inputs + ["-i", str(audio), "-filter_complex", ";".join(fc_parts),
+                     "-map", "[vout]", "-map", f"{a_idx}:a",
+                     "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "24",
+                     "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)])
         print(f"{out.name}: {total:.1f}s (music: {kind})")
     log_run("assemble", "ffmpeg", None, {"mode": "film", "music": kind, "seconds": total}, None, time.time() - t0)
 

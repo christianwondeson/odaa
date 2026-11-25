@@ -1,8 +1,13 @@
 # ARCHITECTURE
-Contract: `storyboard.json`, validated against `schema/storyboard.schema.json` at the start of EVERY stage (`load_storyboard`).
-Stages are independent scripts; each reads the contract and writes `outputs/<stage>/`.
-Caching: key = stage+shot(+aspect); value = sha256 of the inputs (prompt, seed, model, camera, duration, source file hash). Skip if hash matches and the file exists.
-Timing: narration length sets shot length (`shot_seconds`), so changing a narration line re-renders only that shot's clip, and assembly recomputes the track.
-Failure handling: `retry` with exponential backoff (3 tries); errors are logged to runs.jsonl with status=error; missing Wan clip falls back to Ken Burns; missing score falls back to a placeholder pad (flagged in the log).
-Logging: one JSON line per model call: ts, stage, model, shot, params, seed, latency_s, cost_usd, status.
-Secrets: `.env` only, git-ignored.
+- **Contract:** `storyboard.json`, validated against `schema/storyboard.schema.json` at the start of EVERY stage (`load_storyboard`).
+- **One-command orchestrator:** `pipeline/run.py` (`python -m pipeline.run` for full film, `python -m pipeline.run radio` for radio cut) runs `script/validate -> narration -> keyframes -> shots -> music -> assemble`.
+- **Stages:** Independent scripts (`script.py`, `narration.py`, `keyframes.py`, `shots.py`, `music.py`, `assemble.py`) reading `storyboard.json` and writing `outputs/<stage>/`.
+- **Caching:** Key = `stage:shot(:aspect)` in `outputs/.cache.json`; value = SHA-256 of inputs (prompt, seed, model, camera, duration, source file hash). Unchanged shots skip cleanly.
+- **Timing & voice override:** `shot_seconds` sizes each shot from its active audio duration (`outputs/voice_override/shot_XX.{wav,mp3,m4a}` if present, else `outputs/narration/<lang>/shot_XX.wav`) + `0.7s` pad, floored at `min_seconds`.
+- **Failure handling:**
+  - `retry()` with exponential backoff (3 tries) and `runs.jsonl` error logging.
+  - 3-model TTS fallback chain in `narration.py` (`gemini-3.8-flash-tts` -> `gemini-3.8-flash-lite-tts` -> `gemini-2.5-flash-preview-tts`) on `429` daily quota or unavailability, plus RPM pacing.
+  - Video fallback: uses `outputs/wan/shot_XX.mp4` (Kaggle `notebooks/wan22_kaggle.ipynb` or optional WaveSpeed when `WAVESPEED_API_KEY` + `ENABLE_WAVESPEED=1`), else eased 3× oversampled FFmpeg Ken Burns.
+  - Music fallback: uses `outputs/music/chosen.wav` (Kaggle `notebooks/acestep_kaggle.ipynb` or WaveSpeed `--generate`), else quiet placeholder pad.
+- **Assembly:** `0.45s` `xfade` dissolves, `sidechaincompress` ducking, `loudnorm` (`-14 LUFS`, `-1 dBTP`), bilingual Amharic+English opening title, subtitles, and AI end card (`Ebrima`) in `9:16` and `16:9`.
+- **Secrets & build artifacts:** `.env` only, git-ignored (`outputs/work/`, `outputs/smoke/`, `outputs/shots/`, `outputs/final/`, `outputs/.cache.json` are also git-ignored so heavy MP4 renders don't bloat the repo).

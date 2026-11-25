@@ -1,11 +1,12 @@
 {
   "title": "Under the Odaa",
-  "logline": "A girl overlooked in her own home discovers her worth was never measured by how much she gives.",
-  "style_block": "Cinematic illustrated realism, painterly but anatomically believable, rural Oromo highland setting, warm earth palette, deep natural greens, soft golden-hour light, emotionally restrained, no text, no watermark",
-  "character_block": "Fictional Oromo girl about 11, one practical braided hairstyle, faded ochre cotton dress with a thin green border, bare feet, carries a small worn blue notebook",
+  "title_am": "በኦዳ ዛፍ ሥር",
+  "logline": "An Ethiopian girl—wounded by an absent father, separated from her mother, and pushed to exhaustion in an unjust remarried household—discovers no one is coming to save her, yet rises as a brilliant student, communicator, and designer.",
+  "style_block": "Cinematic illustrated realism, expressive Ethiopian East African faces, authentic rural Ethiopian highland setting, warm earth palette, deep natural greens, soft golden-hour light, emotionally grounded, single coherent scene, no split screen, no text, no watermark",
+  "character_block": "Ethiopian Oromo girl with dark brown East African skin, expressive dark eyes, neat Ethiopian braided hair (shuruba), faded ochre cotton dress with a thin green border",
   "narration": {
     "voice": "Kore",
-    "style_instruction": "Calm, warm, unhurried, intimate",
+    "style_instruction": "Calm, warm, intimate, unhurried storytelling",
     "languages": {
       "oro": {
         "name": "Afaan Oromoo",
@@ -20,195 +21,203 @@
   "references": [
     {
       "id": "ref_girl",
-      "prompt": "Character reference sheet of Fictional Oromo girl about 11, one practical braided hairstyle, faded ochre cotton dress with a thin green border, bare feet, carries a small worn blue notebook: front view, side view, back view, neutral background",
-      "seed": 42
+      "prompt": "Single Ethiopian Oromo girl age 11, waist-up front three-quarter portrait, dark brown East African skin, expressive dark eyes, calm serious face, neat Ethiopian braided hair (shuruba), faded ochre cotton dress with thin green border, plain warm clay studio background, single person only, no text, no collage",
+      "seed": 142
+    },
+    {
+      "id": "ref_woman",
+      "prompt": "Single adult Ethiopian Oromo woman age 28, waist-up front three-quarter portrait, dark brown East African skin, warm dignified face with resilient kind eyes, neat Ethiopian braided hair, white cotton netela shawl draped gently over an ochre cotton dress with thin green border, plain warm clay studio background, single person only, no text, no collage",
+      "seed": 144
     },
     {
       "id": "ref_odaa",
-      "prompt": "Environment reference: a vast mature Odaa fig tree on a highland meadow at golden hour",
-      "seed": 43
+      "prompt": "Environment only, no people: a vast mature Ethiopian Odaa sycamore fig tree on a green Oromo highland meadow at golden hour, warm light through branches",
+      "seed": 143
     }
   ],
   "end_card": {
-    "text": "Made with AI. A fictional story inspired by real life.",
-    "seconds": 3
+    "text": "Made with AI. A fictional story honoring women rising beyond hardship.\nበAI የተሠራ። ሴቶች ከመከራ ተነሥተው ሕይወታቸውን ሲያሻሽሉ የሚያሳይ ታሪክ።",
+    "seconds": 2.5
   },
   "shots": [
     {
       "id": "01",
-      "reason": "Introduce the Odaa and the seed: potential nobody notices.",
-      "min_seconds": 7,
-      "image_prompt": "A tiny green seedling pushing out of a crack in dry earth at the foot of a huge old fig tree, wide low angle, centered subject",
-      "motion_prompt": "slow gentle push toward the seedling, leaves stir in light wind",
+      "reason": "Introduce the Odaa and the seed separated from its shade: early displacement and hidden potential.",
+      "min_seconds": 6,
+      "image_prompt": "Pure botanical nature scene, tree bark and leaves only: a single small green seedling resting alone in cracked dry Ethiopian highland earth far from the shade of a huge Odaa fig tree in the distance, golden hour",
+      "motion_prompt": "slow gentle push toward the lone seedling as grass stirs in evening breeze",
       "camera": "push_in",
-      "seed": 1001,
+      "seed": 3001,
       "narration": {
-        "oro": "Muka Odaa jalatti, sanyiin tokko callisee biqila.",
-        "en": "Beneath the Odaa tree, a seed quietly begins to grow.",
-        "am": "በኦዳ ዛፍ ሥር፣ አንድ ዘር በጸጥታ ማደግ ጀመረ።"
+        "oro": "Gaaddisa Odaa irraa adda ba'ee, sanyiin tokko lafa goggogaa keessa kophaa bu'e.",
+        "en": "Separated from the Odaa's shade, a single seed fell alone into dry earth.",
+        "am": "ከኦዳ ዛፍ ጥላ ተለይቶ፣ አንድ ዘር በደረቅ መሬት ውስጥ ብቻውን ወደቀ።"
       },
-      "music_cue": "soft solo plucked string enters",
+      "music_cue": "soft solo plucked krar-like string enters",
       "refs": [
         "ref_odaa"
       ]
     },
     {
       "id": "02",
-      "reason": "Establish the girl and her longing, seen from behind to keep identity safe.",
+      "reason": "Establish the root wound: absent father, separation from mother, and learning to please others to survive.",
       "min_seconds": 8,
-      "image_prompt": "the girl seen from behind sitting on a doorstep at dusk, looking toward a distant empty path, centered",
-      "motion_prompt": "slight breeze moves her dress, camera nearly static",
-      "camera": "static",
-      "seed": 1002,
+      "image_prompt": "Medium close portrait of the Ethiopian girl standing near a weathered wooden doorway looking quietly out at an empty highland path at dusk, clear view of her lonely expressive Ethiopian face and dark eyes, empty stool beside her symbolizing an absent parent",
+      "motion_prompt": "slight breeze moves her dress as she looks down quietly",
+      "camera": "push_in",
+      "seed": 3002,
       "narration": {
-        "oro": "Intalli tokko yeroo tokko, jaalala barbaaddi turte. Garuu mana keessatti, yeroo baay'ee hojii ishee qofa argan.",
-        "en": "There was once a girl who longed for love. But at home, people often noticed only the work she did.",
-        "am": "ፍቅርን የምትናፍቅ አንዲት ልጅ ነበረች። ግን በቤት ውስጥ ሰዎች የሚያዩት ሥራዋን ብቻ ነበር።"
+        "oro": "Ijoollummaa isheetti jaalala abbaa dhabde; haadha irraa fagaachuunis onnee ishee madeesse. Nama hunda gammachiisuuf of dagachuu jalqabde.",
+        "en": "Growing up without a father beside her—and separated from her mother—she learned to shrink herself just to please everyone around her.",
+        "am": "ገና በልጅነቷ የአባት እቅፍ ጎደላት፤ ከእናቷም መለየቷ ልቧን አደማው። ሁሉንም ለማስደሰት ራሷን መርሳት ጀመረች።"
       },
-      "music_cue": "warm pad, sparse",
+      "music_cue": "low warm bowed string, quiet ache",
       "refs": [
         "ref_girl"
       ]
     },
     {
       "id": "03",
-      "reason": "Unequal responsibility, told through hands only.",
-      "min_seconds": 7,
-      "image_prompt": "Close-up of a child's hands washing a smaller child's hair over a clay basin, warm light, no faces",
-      "motion_prompt": "water pours slowly, hands move gently",
-      "camera": "static",
-      "seed": 1003,
+      "reason": "Entering her mother's remarried household: rejection and unfair punishment for reminding her mother of the past.",
+      "min_seconds": 8,
+      "image_prompt": "Medium shot inside an Ethiopian earthen home courtyard: the Ethiopian girl standing timidly near the doorway with a worried expressive Ethiopian face, while an Ethiopian woman mother in the mid-ground turns away coldly in shadow, pointing sternly toward chores, emotional distance and unfair blame",
+      "motion_prompt": "she flinches slightly and lowers her gaze as the shadow stretches across the wall",
+      "camera": "pan_left",
+      "seed": 3003,
       "narration": {
-        "oro": "Ijoollee kaan kunuunsiti. Hojii mana keessaa baatti.",
-        "en": "She cared for the other children. She carried the household chores.",
-        "am": "ሌሎቹን ልጆች ትንከባከባለች። የቤቱን ሥራ ሁሉ ትሸከማለች።"
+        "oro": "Haatishee bultii haaraa ijaarrattee yeroo ishee waamtu abdatte. Garuu haatishee jireenya durii ishee keessatti argitee, badii malee ishee adabdi turte.",
+        "en": "When her mother remarried and called her back, she hoped for warmth. Instead, seeing the past in her firstborn, her mother punished her for no fault.",
+        "am": "እናቷ ሌላ ትዳር መሥርታ ስትጠራት ተስፋ አደረገች። ግን እናቷ የቀድሞውን ትዳር በሷ እያየች፣ ያለምንም ጥፋት ትቀጣት ነበር።"
       },
-      "music_cue": "music holds, slight tension",
+      "music_cue": "tense minimal strings",
       "refs": [
         "ref_girl"
       ]
     },
     {
       "id": "04",
-      "reason": "Emotional absence shown through an empty doorway, not through violence.",
-      "min_seconds": 6,
-      "image_prompt": "An empty doorway of a mud-walled house, a single stool, long late shadow on the floor, nobody in frame",
-      "motion_prompt": "dust drifts in the light",
-      "camera": "pan_right",
-      "seed": 1004,
+      "reason": "Show the sharp unfairness inside the home: the stepfather favoring his 3 children with gifts while she is left out.",
+      "min_seconds": 9,
+      "image_prompt": "Medium wide shot inside a modest Ethiopian home with mud-plaster walls and a woven mesob basket table: in the background a dark-brown-skinned Ethiopian father warmly hands colorful woven gifts and new clothes to three smiling dark-brown-skinned Ethiopian younger children, while in the foreground off to the side our Ethiopian girl stands alone in her faded dress with a hurt, quiet Ethiopian face watching them",
+      "motion_prompt": "slow push-in onto the girl's quiet hurt face in the foreground",
+      "camera": "push_in",
+      "seed": 3014,
       "narration": {
-        "oro": "Garuu eenyutu ishee gaafata, \"Ati hoo akkam jirta?\"",
-        "en": "But who ever asked her, \"And how are you?\"",
-        "am": "ግን «አንቺስ እንዴት ነሽ?» ብሎ የጠየቃት ማን ነበር?"
+        "oro": "Bultii haaraa keessatti ijoolleen sadii yeroo dhalatan, kennaa fi jaalalli isaaniif qofa ta'e. Isheen garuu mana ofii keessatti dagatamte.",
+        "en": "When three younger children were born, every gift and tender glance went to them—leaving her unseen in her own home.",
+        "am": "አዲሱ ትዳር ሦስት ልጆች ሲያፈራ፣ ስጦታውና ፍቅሩ ለነሱ ብቻ ሆነ። እሷ ግን በራሷ ቤት ውስጥ የማትፈለግ እንግዳ ሆነች።"
       },
-      "music_cue": "music thins to near silence"
+      "music_cue": "sparse cello note, gentle dissonance",
+      "refs": [
+        "ref_girl"
+      ]
     },
     {
       "id": "05",
-      "reason": "Her private imagination: the notebook at night.",
-      "min_seconds": 9,
-      "image_prompt": "the girl hands only, drawing patterns in a small blue notebook by oil-lamp light, night, warm glow",
-      "motion_prompt": "pencil moves across the page",
-      "camera": "push_in",
-      "seed": 1005,
+      "reason": "Worked to exhaustion washing clothes and tending her three younger half-siblings.",
+      "min_seconds": 8,
+      "image_prompt": "Medium shot in an Ethiopian mud-walled courtyard, single person in frame only: the Ethiopian girl kneeling alone over a wide wooden washbasin scrubbing a heavy pile of children's clothes with weary soap-wet hands while three pairs of small sandals and folded clothes sit beside the basin, clear view of her exhausted tear-streaked Ethiopian face in morning light",
+      "motion_prompt": "her tired hands scrub the wet cloth steadily as she takes a heavy breath",
+      "camera": "pan_up",
+      "seed": 3015,
       "narration": {
-        "oro": "Halkan tokko tokko, yeroo namoonni hundi rafan, isheen kitaaba ishee bantee ni barreessiti. Yaadni ishee guddaa ture. Abjuun ishee immoo caalaatti guddaa ture.",
-        "en": "Some nights, when everyone slept, she opened her notebook and drew. Her imagination was vast. Her dreams were even bigger.",
-        "am": "አንዳንድ ሌሊት፣ ሁሉም ሲተኙ፣ ደብተሯን ከፍታ ትስል ነበር። ምናቧ ሰፊ ነበር። ሕልሟ ደግሞ የበለጠ ትልቅ ነበር።"
+        "oro": "Uffata obbolaa ishee xiqqoo miiccuu fi tajaajiluun hanga du'aatti dadhabde. Ijoollummaan ishee hojii fi imimmaaniin darbe.",
+        "en": "Washing her half-siblings' clothes and tending the house to the point of collapse, her childhood slipped away in labor and tears.",
+        "am": "የታናናሾቿን ልብስ በማጠብና ቤቱን በማገልገል እስከ ሞት ደረሰች። ልጅነቷ በከባድ ሥራና በእንባ አለቀ።"
       },
-      "music_cue": "gentle melody emerges",
+      "music_cue": "low steady pulse, heavy mood",
       "refs": [
         "ref_girl"
       ]
     },
     {
       "id": "06",
-      "reason": "At school her talent becomes visible.",
-      "min_seconds": 9,
-      "image_prompt": "the girl at a wooden school desk, a raised hand, a teacher's hand holding out a marked paper, bright classroom, medium shot",
-      "motion_prompt": "paper is handed over, slight smile",
+      "reason": "The darkest truth: realizing life is cruel and nobody is coming to rescue her.",
+      "min_seconds": 7,
+      "image_prompt": "Close medium shot in a dim traditional Ethiopian earthen corner at dusk: the Ethiopian girl sitting curled hugging her knees against a mud wall, clear close view of her glistening determined Ethiopian eyes looking forward out of the shadows, deep quiet resolve",
+      "motion_prompt": "shadow shifts slowly, she blinks away a tear and lifts her head with resolve",
       "camera": "push_in",
-      "seed": 1006,
+      "seed": 3006,
       "narration": {
-        "oro": "Mana barumsaa keessatti, dandeettiin ishee ifa ba'e. Harka ishee keessatti, fakkiiwwan, halluuwwanii fi yaadawwan haaraan dhalatan.",
-        "en": "At school, her talent began to shine. In her hands, new pictures, colours and ideas came to life.",
-        "am": "በትምህርት ቤት ችሎታዋ ማብራት ጀመረ። በእጆቿ አዳዲስ ሥዕሎች፣ ቀለሞችና ሐሳቦች ሕያው ሆኑ።"
+        "oro": "Rakkina hamtuu san keessatti addunyaan gara-jabeettii ta'uu barte; eenyullee dhufee akka ishee hin baraarres hubatte.",
+        "en": "In those life-crushing days, she realized how cruel the world could be—and that no one was coming to save her.",
+        "am": "በዛ መከራ ውስጥ ዓለም ጨካኝ እንደሆነች ተረዳች፤ ማንም መጥቶ እንደማያድናትም አወቀች።"
       },
-      "music_cue": "melody grows, brighter",
+      "music_cue": "music drops to a single sustained tone",
       "refs": [
         "ref_girl"
       ]
     },
     {
       "id": "07",
-      "reason": "Match the invisible growth of roots to the girl's growth.",
-      "min_seconds": 5,
-      "image_prompt": "Cross-section view of Odaa roots spreading wide under warm soil, a thin line of water reaching them, painterly",
-      "motion_prompt": "roots glow subtly, slow downward drift",
-      "camera": "pull_back",
-      "seed": 1007,
-      "narration": {
-        "oro": "Yeroon darbe.",
-        "en": "Time passed.",
-        "am": "ጊዜ አለፈ።"
-      },
-      "music_cue": "strings swell softly",
-      "refs": [
-        "ref_odaa"
-      ]
-    },
-    {
-      "id": "08",
-      "reason": "Childhood to adulthood: the same hands, older.",
+      "reason": "The turning point: full of life, excelling at school, communicating vividly, and sketching fast designs.",
       "min_seconds": 9,
-      "image_prompt": "Adult woman's hands, same ochre sleeve border, drawing in the worn blue notebook, same lamp, morning light now",
-      "motion_prompt": "pages turn, hand continues drawing",
-      "camera": "static",
-      "seed": 1008,
+      "image_prompt": "Medium shot in a sunlit rural Ethiopian classroom with plastered mud walls and wooden desks: our Ethiopian girl standing vibrantly with a bright lively smile on her clear Ethiopian face, speaking eagerly with expressive hands while holding open a worn blue notebook filled with intricate clothing and pattern sketches, Ethiopian classmates listening warmly",
+      "motion_prompt": "sunlight warms the room as she gestures enthusiastically over her design notebook",
+      "camera": "pan_right",
+      "seed": 3007,
       "narration": {
-        "oro": "Intalli sun guddatte. Garuu waan tokko baratte: nama biraa jaallachuun, of dagachuu jechuu miti.",
-        "en": "The girl grew up. But she learned something: loving others does not mean forgetting yourself.",
-        "am": "ልጅቷ አደገች። ግን አንድ ነገር ተማረች፦ ሌሎችን መውደድ ራስን መርሳት ማለት አይደለም።"
+        "oro": "Garuu intalli du'aaf dhiifamte sun hin mo'amne. Barattuu cimaa, dubbattuu gaarii, jireenyaan guutamtuu fi dizaayinii saffisaan hojjettu taatee baate.",
+        "en": "Yet the child pushed toward ruin refused to fade. She became a brilliant student, a vivid speaker full of life, and swift with her hands in design.",
+        "am": "ግን ሞት የተመኘላት ያቺ ልጅ አልተሸነፈችም። ጎበዝ ተማሪ፣ ድንቅ ተናጋሪ፣ በሕይወት የተሞላችና ፈጣን የዲዛይን ባለሙያ ሆና ወጣች።"
       },
-      "music_cue": "theme returns",
+      "music_cue": "hopeful plucked krar melody enters and lifts",
       "refs": [
         "ref_girl"
       ]
     },
     {
-      "id": "09",
-      "reason": "She chooses to care for herself: motif reframed.",
-      "min_seconds": 8,
-      "image_prompt": "Adult woman sitting in the shade of the Odaa, resting, cup of coffee in her own hands, seen from the side",
-      "motion_prompt": "leaves move in the shade, she exhales",
-      "camera": "pan_left",
-      "seed": 1009,
+      "id": "08",
+      "reason": "Visual metaphor: roots growing deep beneath heavy stone.",
+      "min_seconds": 5,
+      "image_prompt": "Pure botanical nature scene, no people: painterly cross-section of thick Odaa fig tree roots pushing past heavy rocks through dark Ethiopian soil while clear rainwater nourishes them, golden light above",
+      "motion_prompt": "slow downward drift as water glimmers along deep roots",
+      "camera": "pan_down",
+      "seed": 3008,
       "narration": {
-        "oro": "Muka Odaa akkuma gaaddisa kennu, isheenis ofii ishee kunuunsuu baratte.",
-        "en": "Like the Odaa tree offering shade, she learned to care for herself, too.",
-        "am": "የኦዳ ዛፍ ጥላ እንደሚሰጥ ሁሉ፣ እሷም ራሷን መንከባከብን ተማረች።"
+        "oro": "Dhiibbaa jalaa hiddishee dhokatee ture bishaan argatee gadi fagaatee cimaa deeme.",
+        "en": "Beneath the hardest stone, her hidden roots drank deep and held fast.",
+        "am": "በጭቆና ሥር የተደበቀው ሥሯ ውኃ አግኝቶ በጥልቅ ተዘረጋ።"
       },
-      "music_cue": "warm sustained chord",
+      "music_cue": "warm strings swell softly",
       "refs": [
-        "ref_girl",
         "ref_odaa"
       ]
     },
     {
-      "id": "10",
-      "reason": "Ending image and message: shelter, belonging, gentle washing of a child's hair under the canopy.",
-      "min_seconds": 10,
-      "image_prompt": "Wide view of the mature Odaa canopy with a woman and a small child sitting beneath it, golden hour, centered",
-      "motion_prompt": "slow pull back revealing the full canopy",
-      "camera": "pull_back",
-      "seed": 1010,
+      "id": "09",
+      "reason": "Adulthood: an independent Ethiopian woman leading her own design craft with voice and dignity.",
+      "min_seconds": 8,
+      "image_prompt": "Medium shot in a bright Ethiopian craft and fashion studio: the adult Ethiopian Oromo woman standing proudly beside a wooden worktable draped with vibrant Ethiopian handwoven textiles, holding her open blue design sketchbook and speaking warmly with confident grace, clear dignified Ethiopian face in golden morning light",
+      "motion_prompt": "she smiles warmly and turns a page in her sketchbook as morning sunbeams drift",
+      "camera": "pan_left",
+      "seed": 3009,
       "narration": {
-        "oro": "Gatiin ishee waan kennituun hin madaalamu. Isheen nama guutuu dha. Isheen kunuunsa, jaalalaafi kabaja argachuu qabdi.",
-        "en": "Her worth is not measured by what she gives. She is a whole person. She deserves care, love and respect.",
-        "am": "ዋጋዋ በምትሰጠው አይለካም። ሙሉ ሰው ናት። እንክብካቤ፣ ፍቅርና ክብር ይገባታል።"
+        "oro": "Har'a hojii dizaayinii ofiishee geggeessitu, sagaleenshee dhaga'amuu fi of kabajju dubartii cimaa taateetti.",
+        "en": "Today she leads her own design craft—speaking with clarity, standing in dignity, no longer erasing herself to be loved.",
+        "am": "ዛሬ የራሷን የዲዛይን ሥራ የምትመራ፣ ቃሏ የሚሰማና ራሷን የምታከብር ጠንካራ ሴት ሆናለች።"
       },
-      "music_cue": "theme resolves, fade out",
+      "music_cue": "uplifting main theme in full warmth",
       "refs": [
+        "ref_woman"
+      ]
+    },
+    {
+      "id": "10",
+      "reason": "Closing shelter and wisdom under the Odaa canopy: surviving the storm to shelter others.",
+      "min_seconds": 9,
+      "image_prompt": "Wide medium golden-hour portrait under the vast Odaa fig tree canopy: the adult Ethiopian Oromo woman sitting warmly beside a young Ethiopian girl holding a blue sketchbook, both smiling with clear Ethiopian faces looking at each other in safety and mutual respect, highland meadow behind them",
+      "motion_prompt": "slow pull back revealing the protective Odaa canopy glowing in golden sunset light",
+      "camera": "pull_back",
+      "seed": 3010,
+      "narration": {
+        "oro": "Dubartiin qormaata keessaa baate hedduuf gaaddisa taati. Gatiin kee waan kennituun hin madaalamu; ati nama guutuudha.",
+        "en": "A woman who survives the storm becomes shelter for others. Your worth is never measured by how much you give—you are whole.",
+        "am": "ከመከራ የተረፈች ሴት ለብዙዎች ጥላ ትሆናለች። ዋጋሽ ለሌሎች በምትሰጪው አይለካም፤ አንቺ ሙሉ ሰው ነሽ።"
+      },
+      "music_cue": "theme resolves gently and fades out",
+      "refs": [
+        "ref_woman",
         "ref_girl",
         "ref_odaa"
       ]

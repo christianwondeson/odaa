@@ -62,19 +62,43 @@ def retry(fn, tries=3, base=2.0):
             time.sleep(base ** i)
 
 
-def wav_seconds(path):
-    with wave.open(str(path), "rb") as w:
-        return w.getnframes() / w.getframerate()
+def audio_seconds(path):
+    p = pathlib.Path(path)
+    if p.suffix.lower() == ".wav":
+        with wave.open(str(p), "rb") as w:
+            return w.getnframes() / w.getframerate()
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(p)],
+                       capture_output=True, text=True)
+    return float(r.stdout.strip()) if r.returncode == 0 and r.stdout.strip() else 0.0
+
+
+def narration_audio_path(shot_id):
+    """Prefer an optional human voice override in outputs/voice_override/ if present, else generated TTS."""
+    override_dir = OUT / "voice_override"
+    for ext in (".wav", ".mp3", ".m4a", ".ogg"):
+        cand = override_dir / f"shot_{shot_id}{ext}"
+        if cand.exists():
+            return cand
+    return OUT / "narration" / LANG() / f"shot_{shot_id}.wav"
+
+
+def narration_tempo(shot_id):
+    """Keep human voice overrides at 1.0x; normalize slow TTS phrasing to fit 60-90s."""
+    override_dir = OUT / "voice_override"
+    if any((override_dir / f"shot_{shot_id}{ext}").exists() for ext in (".wav", ".mp3", ".m4a", ".ogg")):
+        return 1.0
+    return float(os.environ.get("NARRATION_TEMPO", "1.22"))
 
 
 LANG = lambda: os.environ.get("NARRATION_LANG", "am")
 
 
-def shot_seconds(shot, pad=0.7):
+def shot_seconds(shot, pad=0.25):
     """Shot length = narration length + pad, never below the storyboard minimum.
     The narration sets the timing, as in a professional cut."""
-    wav = OUT / "narration" / LANG() / f"shot_{shot['id']}.wav"
-    n = wav_seconds(wav) + pad if wav.exists() else 0
+    aud = narration_audio_path(shot["id"])
+    tempo = narration_tempo(shot["id"])
+    n = (audio_seconds(aud) / tempo) + pad if aud.exists() else 0
     return round(max(shot["min_seconds"], n), 2)
 
 

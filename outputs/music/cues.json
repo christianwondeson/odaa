@@ -2,61 +2,61 @@
  {
   "shot": "01",
   "start": 0.0,
-  "end": 7.0,
-  "cue": "soft solo plucked string enters"
+  "end": 6.0,
+  "cue": "soft solo plucked krar-like string enters"
  },
  {
   "shot": "02",
-  "start": 7.0,
-  "end": 16.08,
-  "cue": "warm pad, sparse"
+  "start": 6.0,
+  "end": 15.47,
+  "cue": "low warm bowed string, quiet ache"
  },
  {
   "shot": "03",
-  "start": 16.08,
-  "end": 23.08,
-  "cue": "music holds, slight tension"
+  "start": 15.47,
+  "end": 24.22,
+  "cue": "tense minimal strings"
  },
  {
   "shot": "04",
-  "start": 23.08,
-  "end": 29.08,
-  "cue": "music thins to near silence"
+  "start": 24.22,
+  "end": 33.36,
+  "cue": "sparse cello note, gentle dissonance"
  },
  {
   "shot": "05",
-  "start": 29.08,
-  "end": 40.29,
-  "cue": "gentle melody emerges"
+  "start": 33.36,
+  "end": 41.36,
+  "cue": "low steady pulse, heavy mood"
  },
  {
   "shot": "06",
-  "start": 40.29,
-  "end": 50.15,
-  "cue": "melody grows, brighter"
+  "start": 41.36,
+  "end": 48.76,
+  "cue": "music drops to a single sustained tone"
  },
  {
   "shot": "07",
-  "start": 50.15,
-  "end": 55.15,
-  "cue": "strings swell softly"
+  "start": 48.76,
+  "end": 59.53,
+  "cue": "hopeful plucked krar melody enters and lifts"
  },
  {
   "shot": "08",
-  "start": 55.15,
-  "end": 64.15,
-  "cue": "theme returns"
+  "start": 59.53,
+  "end": 65.63,
+  "cue": "warm strings swell softly"
  },
  {
   "shot": "09",
-  "start": 64.15,
-  "end": 72.15,
-  "cue": "warm sustained chord"
+  "start": 65.63,
+  "end": 73.63,
+  "cue": "uplifting main theme in full warmth"
  },
  {
   "shot": "10",
-  "start": 72.15,
-  "end": 82.15,
-  "cue": "theme resolves, fade out"
+  "start": 73.63,
+  "end": 84.84,
+  "cue": "theme resolves gently and fades out"
  }
 ]
