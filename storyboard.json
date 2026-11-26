@@ -135,10 +135,10 @@
       "id": "06",
       "reason": "Her darkest moment under the Odaa roots: realizing no one is coming to save her, drawing quiet resolve from the tree.",
       "min_seconds": 7,
-      "image_prompt": "Close medium shot at twilight beneath the gnarled roots and dark canopy of the great Odaa fig tree: the Ethiopian girl sitting curled hugging her knees with her worn blue notebook tucked beside her against the Odaa trunk, clear close view of her glistening determined Ethiopian eyes looking forward out of deep shadow",
+      "image_prompt": "Close medium shot at twilight beneath the gnarled roots and dark canopy of the great Odaa fig tree: the Ethiopian girl sitting quietly leaning her back against the Odaa trunk, both hands resting cleanly on her closed worn blue notebook in her lap, exactly two arms and two natural hands visible, clear close view of her glistening determined Ethiopian eyes looking forward out of deep shadow",
       "motion_prompt": "slow push-in toward her determined eyes against the Odaa roots as twilight settles",
       "camera": "push_in",
-      "seed": 3106,
+      "seed": 3206,
       "narration": {
         "oro": "Rakkina hamtuu san keessatti addunyaan gara-jabeettii ta'uu barte; eenyullee dhufee akka ishee hin baraarres hubatte.",
         "en": "In those life-crushing days, she realized how cruel the world could be—and that no one was coming to save her.",

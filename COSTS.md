@@ -10,9 +10,9 @@ Measure from runs.jsonl: latency per stage, GPU minutes (Kaggle), free-tier limi
 | benchmark_tts (`hasab:Selam` + `hasab:Lemlem`) | 8 (8 ok) | 35.98 s | 0 | Evaluation tier (~4.5s/shot) |
 | benchmark_tts (`addis:am-hamen` + `addis:om-ayyaantuu`) | 6 (4 ok, 2 err) | 18.48 s | 0 | $0.00 (signup trial credit; ~$0.031/voice min list) |
 | benchmark_tts (`gemini-3.8-flash` + `lite`) | 6 (6 ok) | 77.55 s | 0 | $0.00 (AI Studio free tier) |
-| keyframes (`@cf/black-forest-labs/flux-2-klein-4b`, all iterations) | 51 (51 ok) | 492.88 s | 0 | $0.00 (~$0.0014/img list on CF, ~$0.015 on BFL) |
+| keyframes (`@cf/black-forest-labs/flux-2-klein-4b`, all iterations) | 52 (52 ok) | 500.58 s | 0 | $0.00 (~$0.0014/img list on CF, ~$0.015 on BFL) |
 | benchmark_image (`@cf/black-forest-labs/flux-1-schnell`) | 2 (2 ok) | 64.30 s | 0 | $0.00 (Cloudflare free tier) |
-| shots (`ffmpeg-kenburns`, all iterations) | 164 (164 ok) | 1887.28 s | 0 (local) | $0.00 |
+| shots (`ffmpeg-kenburns`, all iterations) | 168 (168 ok) | 1920.89 s | 0 (local) | $0.00 |
 | wan (`Wan 2.2 TI2V-5B`, Kaggle) | TBD | TBD | TBD | TBD (~$0.05/5s 480p, ~$0.10/5s 720p WaveSpeed ref) |
 | music (`ACE-Step 1.5`, Kaggle) | TBD | TBD | TBD | TBD (~$0.027/90s WaveSpeed ref) |
-| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 22 (22 ok) | 1916.74 s | 0 (local) | $0.00 |
+| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 24 (24 ok) | 2073.49 s | 0 (local) | $0.00 |

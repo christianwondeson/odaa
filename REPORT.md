@@ -1,6 +1,6 @@
 # Report — Under the Odaa (በኦዳ ዛፍ ሥር)
 
-> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E12`, and failure logs `F01`–`F09` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require real human listening/testing, consent confirmation, optional Kaggle GPU outputs, and final publish links before submission.
+> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E13`, and failure logs `F01`–`F10` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require real human listening/testing, consent confirmation, optional Kaggle GPU outputs, and final publish links before submission.
 
 ## 1. Story, Audience, and Why This Film Exists
 - **Title:** *Under the Odaa / በኦዳ ዛፍ ሥር* (`9:16` vertical primary for WhatsApp/TikTok, plus `16:9` widescreen).
@@ -25,8 +25,8 @@
 - **User Test 2 — Near-Final Cut (3+ people):** `(TO FILL: date, feedback on character consistency across shots, emotional ending under the Odaa tree, phone subtitle readability, and final edits made.)`
 
 ## 5. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
-- Measured across `314` logged calls in `runs.jsonl`: keyframes (`51/51` ok, `492.88s`), narration on Gemini (`46/53` ok across 3 models, `743.45s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`164/164` ok, `1887.28s`), and assembly (`22/22` ok, `1916.74s`).
-- Documented `9` real blockers (`F01`–`F09`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, and Addis AI's undocumented `client_request_id` requirement (`422 CLIENT_REQUEST_ID_REQUIRED`).
+- Measured across `321` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`46/53` ok across 3 models, `743.45s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`168/168` ok, `1920.89s`), and assembly (`24/24` ok, `2073.49s`).
+- Documented `10` real blockers (`F01`–`F10`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, Addis AI's undocumented `client_request_id` requirement (`422 CLIENT_REQUEST_ID_REQUIRED`), and `shot_06`'s crossed-knee extra-arm artifact.
 - **Kaggle GPU (`Wan 2.2` / `ACE-Step`):** `(TO FILL if run: GPU minutes, outputs/music/chosen.wav choice, Wan vs Ken Burns takeaway.)`
 
 ## 6. Ethics, Consent & Links (`ETHICS.md`)
