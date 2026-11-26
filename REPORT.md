@@ -14,22 +14,29 @@
   - Optional Ethiopian-native `TTS_PROVIDER=hasab|addis|auto` routes narration through Hasab AI (`Selam`/`Lemlem`) or Addis AI (`am-hamen`/`om-ayyaantuu`), and `outputs/voice_override/<lang>/` prioritizes real human recordings at `1.0x` tempo.
   - Visuals and music swap cleanly between Kaggle GPU outputs (`outputs/wan/`, `outputs/music/chosen.wav`) and deterministic local FFmpeg fallbacks (3x oversampled cosine-eased Ken Burns + `-14 LUFS` `loudnorm` + `sidechaincompress` ducking).
 
-## 3. Experiments & What Changed Our Mind (`EXPERIMENTS.md`)
-- **Character & Motif Consistency (`E03`–`E05`, `E11`):** Splitting a 3-view turnaround sheet into clean single portraits (`ref_girl`, `ref_woman`), scoping facial directives out of botanical shots (`F06`), fixing washbasin hand wording (`shot_03`), and threading `ref_odaa` across key beats eliminated cloned figures, non-Ethiopian drift, and bark faces.
-- **Image Model Comparison (`E09`):** `@cf/black-forest-labs/flux-2-klein-4b` with `<=512px` portrait refs maintained character continuity (`~9.66s` avg across 51 runs) vs. `@cf/black-forest-labs/flux-1-schnell` (`flux-1-schnell` drifted to 2D cartoon in `shot_04` and 3-hand photorealism in `shot_10`).
-- **Multilingual & Provider Benchmark (`E01`, `E02`, `E12`):** Full 10-shot cuts run in both Amharic (`88.74s`) and Afaan Oromoo (`89.88s`). Benchmarking Gemini vs. Hasab AI vs. Addis AI on `am` Shots `08`/`09` and `oro` Shots `01`/`06` showed local Ethiopian TTS APIs ran **2–6x faster** (`3.49s–4.95s` vs. `9.75s–31.39s` on Gemini) at natural speaking speed (`1.0x`, no `1.22x` acceleration needed).
-- **Listener Choice (`E12`, `E13`):** Comparing Hasab AI, Addis AI, and Gemini TTS on real playback showed **Hasab AI** is more accurate on individual Amharic words, while **Gemini TTS** captivates the listener with stronger emotional storytelling cadence—so Gemini was kept for the film, alongside native-listener phrasing/model fixes on Shots `03` (`0:19`, "allowed her to live with her"), `05` (`0:33`), and `10` (`1:18` `ጥላ`). *(Still pending: formal `1–5` ratings from 3+ external listeners.)*
+## 3. Practices Tested Honestly (Suggested Practices vs. Instinct — `10 pts`)
+- **Practice that beat instinct — Single waist-up portrait refs + per-stage caching (`E03`, `E08`):** Building a strict JSON Schema contract + SHA-256 input cache (`outputs/.cache.json`) and splitting `ref_girl` and `ref_woman` into single waist-up portraits felt slower upfront than prompting scenes straight away. In practice, it saved hours during `E13` and `F10` (regenerating Shot `03`/`05`/`10` narration and `shot_06` keyframe cleanly without touching the other 9 shots) and eliminated non-Ethiopian adult drift in `shot_09`.
+- **Practice that did NOT work as assumed — Multi-view turnaround sheet & global style-block faces (`F06`, `E03`, `E04`):** Prompting a classic 3-view character turnaround sheet (`ref_girl`) and putting `"expressive Ethiopian East African faces"` in the global `style_block` backfired on FLUX.2 klein: FLUX pasted 2–3 cloned figures into `shot_05`/`shot_08` and rendered human faces onto the Odaa tree trunk in `shot_01`. Fixing both required removing text/multi-views from references and conditioning face directives only on shots containing people.
 
-## 4. Reflection from Audience Tests (`DESIGN.md`, `TEST_PROTOCOL.md`)
-- **User Test 1 — Radio Cut (3+ people):** `(TO FILL: date, who watched, exact observations on pacing/narration/Oromo vs Amharic clarity, and what lines changed in storyboard.json.)`
-- **User Test 2 — Near-Final Cut (3+ people):** `(TO FILL: date, feedback on character consistency across shots, emotional ending under the Odaa tree, phone subtitle readability, and final edits made.)`
+## 4. Reflection & Learning from Audience + Listener Passes (`10 pts`)
+- **Hardest technical problem & solution (`F11`, `F05`, `F07`, `F09`):** Solving silent FFmpeg `xfade` stream truncation at `62.75 s` (`1:02.75`) when `am` and `oro` shared `outputs/shots/`, plus surviving `10 RPD` Gemini TTS caps via a 3-model endpoint chain (`Interactions` WAV vs `generateContent` PCM) and uncovering Addis AI's undocumented `client_request_id` requirement (`422`).
+- **Native Amharic Listener Pass (`E12`, `E13`):** Real playback flagged three exact issues: Shot `03` (`0:19`, `"called her"` -> updated to `"ከሷ ጋር እንድትኖር ስትፈቅድላት"` / *"allowed her to live with her"*), Shot `05` (`0:33`, dense `የታናናሾቿን` -> simplified to `የታናናሽ ልጆቹን`), and Shot `10` (`1:18`, `ጥላ` mispronounced on `2.5-preview` -> regenerated on `3.8-flash-lite-tts`). Comparing providers showed **Hasab AI** pronounced words more accurately, while **Gemini TTS** delivered warmer storytelling cadence (`Gemini` selected for final film).
+- **User Test 1 — Radio Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ names/roles from target audience, verbatim feedback on pacing/emotion/clarity, and exact lines changed in storyboard.json.)`
+- **User Test 2 — Near-Final Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ people watching film_9x16.mp4 on phones, feedback on girl consistency across shots, ending under the Odaa tree, subtitle legibility, and final tweaks made.)`
 
-## 5. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
+## 5. Curiosity Beyond the Floor (`10 pts`)
+- **Extra Language (`E01`, `E02`):** Built complete bilingual `storyboard.json`, narration WAVs, subtitles (`am+en` and `oro+en`), radio cuts, and `9:16` / `16:9` MP4s in **Afaan Oromoo** (`89.88 s`) alongside **Amharic** (`88.74 s`), proving empirically where general TTS lacks Oromo support (`F01`).
+- **Two Real Model Benchmarks (`E09`, `E12`):**
+  - *Image (`E09`):* `@cf/black-forest-labs/flux-2-klein-4b` with `<=512px` portrait refs held character identity cleanly (`~9.6s`/img) vs. `@cf/black-forest-labs/flux-1-schnell` (`4` steps, no refs -> drifted to 2D cartoon in `shot_04` and 3-hand photorealism in `shot_10`).
+  - *Speech (`E12`):* Benchmarked **Gemini TTS** vs. **Hasab AI** (`Selam`/`Lemlem`, `3.80–4.95 s`) vs. **Addis AI** (`am-hamen`/`om-ayyaantuu`, `3.49–4.93 s`) across both `am` (`08`/`09`) and `oro` (`01`/`06`), saving all 10 side-by-side WAVs in `outputs/benchmarks/tts/`.
+- **Agent Tooling (`E10`):** Packaged validation, shot inspection, single-shot regeneration, and `build_film` as an **MCP Server** ([pipeline/mcp_server.py](pipeline/mcp_server.py)) so any coding agent can operate the studio cleanly.
+
+## 6. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
 - Measured across `363` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`46/53` ok across 3 models, `743.45s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`208/208` ok, `2258.75s`), and assembly (`26/26` ok, `2239.57s`).
 - Documented `11` real blockers (`F01`–`F11`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, Addis AI's undocumented `client_request_id` requirement (`422`), `shot_06`'s crossed-knee extra-arm artifact, and shared `outputs/shots/` truncation under `xfade`.
 - **Kaggle GPU (`Wan 2.2` / `ACE-Step`):** `(TO FILL if run: GPU minutes, outputs/music/chosen.wav choice, Wan vs Ken Burns takeaway.)`
 
-## 6. Ethics, Consent & Links (`ETHICS.md`)
+## 7. Ethics, Consent & Links (`ETHICS.md`)
 - **Consent & Native Review:** `(TO FILL: date mother approved story inspiration; confirmation that `am` and `oro` scripts + proverb were reviewed and set `reviewed: true`.)`
 - **Deliverable Links:**
   - Repository: https://github.com/christianwondeson/odaa
