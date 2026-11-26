@@ -19,15 +19,15 @@ Read each shot aloud naturally at an unhurried, intimate pace.
 - **English:** Growing up without a father beside her—and separated from her mother—she learned to shrink herself just to please everyone around her.
 
 ### Shot 03 (~8s) — Mother's Remarriage & Unfair Punishment
-- **Amharic:** እናቷ ሌላ ትዳር መሥርታ ስትጠራት ተስፋ አደረገች። ግን እናቷ የቀድሞውን ትዳር በሷ እያየች፣ ያለምንም ጥፋት ትቀጣት ነበር።
-- **English:** When her mother remarried and called her back, she hoped for warmth. Instead, seeing the past in her firstborn, her mother punished her for no fault.
+- **Amharic:** እናቷ ሌላ ትዳር መሥርታ ከሷ ጋር እንድትኖር ስትፈቅድላት ተስፋ አደረገች። ግን የቀድሞውን ትዳር በሷ እያየች፣ ያለምንም ጥፋት ትቀጣት ነበር።
+- **English:** When her mother remarried and allowed her to live with her, she hoped for warmth. Instead, seeing the past in her firstborn, her mother punished her for no fault.
 
 ### Shot 04 (~9s) — Favoritism Toward the 3 Half-Siblings
 - **Amharic:** አዲሱ ትዳር ሦስት ልጆች ሲያፈራ፣ ስጦታውና ፍቅሩ ለነሱ ብቻ ሆነ። እሷ ግን በራሷ ቤት ውስጥ የማትፈለግ እንግዳ ሆነች።
 - **English:** When three younger children were born, every gift and tender glance went to them—leaving her unseen in her own home.
 
 ### Shot 05 (~8s) — Worked to Exhaustion Caring for the Siblings
-- **Amharic:** የታናናሾቿን ልብስ በማጠብና ቤቱን በማገልገል እስከ ሞት ደረሰች። ልጅነቷ በከባድ ሥራና በእንባ አለቀ።
+- **Amharic:** የታናናሽ ልጆቹን ልብስ በማጠብና ቤቱን በማገልገል እስከ ሞት ደረሰች። ልጅነቷ በከባድ ሥራና በእንባ አለቀ።
 - **English:** Washing her half-siblings' clothes and tending the house to the point of collapse, her childhood slipped away in labor and tears.
 
 ### Shot 06 (~7s) — "No One Is Coming to Save Me"

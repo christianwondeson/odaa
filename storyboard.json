@@ -86,9 +86,9 @@
       "camera": "pan_left",
       "seed": 3003,
       "narration": {
-        "oro": "Haatishee bultii haaraa ijaarrattee yeroo ishee waamtu abdatte. Garuu haatishee jireenya durii ishee keessatti argitee, badii malee ishee adabdi turte.",
-        "en": "When her mother remarried and called her back, she hoped for warmth. Instead, seeing the past in her firstborn, her mother punished her for no fault.",
-        "am": "እናቷ ሌላ ትዳር መሥርታ ስትጠራት ተስፋ አደረገች። ግን እናቷ የቀድሞውን ትዳር በሷ እያየች፣ ያለምንም ጥፋት ትቀጣት ነበር።"
+        "oro": "Haatishee bultii haaraa ijaarrattee akka ishee waliin jiraattu yeroo hayyamtuuf abdatte. Garuu haatishee jireenya durii ishee keessatti argitee, badii malee ishee adabdi turte.",
+        "en": "When her mother remarried and allowed her to live with her, she hoped for warmth. Instead, seeing the past in her firstborn, her mother punished her for no fault.",
+        "am": "እናቷ ሌላ ትዳር መሥርታ ከሷ ጋር እንድትኖር ስትፈቅድላት ተስፋ አደረገች። ግን የቀድሞውን ትዳር በሷ እያየች፣ ያለምንም ጥፋት ትቀጣት ነበር።"
       },
       "music_cue": "tense minimal strings",
       "refs": [
@@ -124,7 +124,7 @@
       "narration": {
         "oro": "Uffata obbolaa ishee xiqqoo miiccuu fi tajaajiluun hanga du'aatti dadhabde. Ijoollummaan ishee hojii fi imimmaaniin darbe.",
         "en": "Washing her half-siblings' clothes and tending the house to the point of collapse, her childhood slipped away in labor and tears.",
-        "am": "የታናናሾቿን ልብስ በማጠብና ቤቱን በማገልገል እስከ ሞት ደረሰች። ልጅነቷ በከባድ ሥራና በእንባ አለቀ።"
+        "am": "የታናናሽ ልጆቹን ልብስ በማጠብና ቤቱን በማገልገል እስከ ሞት ደረሰች። ልጅነቷ በከባድ ሥራና በእንባ አለቀ።"
       },
       "music_cue": "low steady pulse, heavy mood",
       "refs": [

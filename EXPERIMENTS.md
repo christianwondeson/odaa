@@ -62,7 +62,12 @@ Result: Both Ethiopian providers were **2–6x faster** than Gemini and required
 - `am` Shot `09`: `hasab:Selam` `4.95s` latency / `7.50s` audio; `addis:am-hamen` `4.93s` / `6.71s`; `gemini-3.8-flash-tts` `9.75s` / `9.26s` (`9.85s` existing WAV); `gemini-3.8-flash-lite-tts` `31.39s` / `8.03s`.
 - `oro` Shot `01`: `hasab:Lemlem` `4.45s` / `5.68s` audio; `addis:om-ayyaantuu` `3.49s` / `4.78s` audio (vs. existing Gemini `8.33s`).
 - `oro` Shot `06`: `hasab:Lemlem` `4.95s` / `7.78s` audio; `addis:om-ayyaantuu` `4.47s` / `7.24s` audio (vs. existing Gemini `9.49s`).
-All comparison WAVs saved under `outputs/benchmarks/tts/{am,oro}/`; blind native-listener pronunciation & naturalness rating (1–5) pending listening by fluent Amharic/Oromo speakers.
+All comparison WAVs saved under `outputs/benchmarks/tts/{am,oro}/`. **Listener verdict:** Hasab AI was more accurate on Amharic word pronunciation, while Gemini TTS delivered warmer storytelling expression that captivated the listener better—**Gemini TTS selected to win** for the film.
+
+## E13 - Native Amharic listener script/pronunciation fixes (`0:19` Shot 03, `0:33` Shot 05, `1:18` Shot 10)
+Hypothesis: Revising Shot 03's mother line (`ስትጠራት` -> `ከሷ ጋር እንድትኖር ስትፈቅድላት`, meaning allowed her to live with her), simplifying Shot 05's consonant-heavy cluster (`የታናናሾቿን` -> `የታናናሽ ልጆቹን`), and replacing Shot 10's `gemini-2.5-flash-preview-tts` clip (`ጥላ` mispronunciation at `1:18`) improves clarity on all three flagged timestamps.
+Change: Updated Shots `03` and `05` in `storyboard.json` and `docs/AMHARIC_SCRIPT.md`, invalidated Shot `10`'s `2.5` cache entry and `oro` Shot `03` cache, and regenerated `03` (`gemini-3.8-flash-tts`), `05`, and `10` (`gemini-3.8-flash-lite-tts`), keeping untouched shots cached.
+Result: Rebuilt all 6 MP4 deliverables cleanly inside the `60–90s` target: `film_9x16.mp4` & `film_16x9.mp4` (`88.74s`), `radio_cut_am.mp4` (`86.24s`), `film_9x16_oro.mp4` & `film_16x9_oro.mp4` (`89.88s`), and `radio_cut_oro.mp4` (`87.38s`).
 
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).
