@@ -37,7 +37,9 @@ def kb_filter(camera, W, H, frames):
 def main(only=None):
     load_env()
     sb = load_storyboard()
-    (OUT / "shots").mkdir(parents=True, exist_ok=True)
+    lang = LANG()
+    shots_dir = OUT / "shots" / lang
+    shots_dir.mkdir(parents=True, exist_ok=True)
     use_ws = bool(os.environ.get("WAVESPEED_API_KEY")) and os.environ.get("ENABLE_WAVESPEED") == "1"
     for s in sb["shots"]:
         if only and s["id"] != only: continue
@@ -59,19 +61,20 @@ def main(only=None):
         if src == "kenburns" and not key.exists():
             print(f"shot {s['id']}: no keyframe yet, skipping"); continue
         for asp, (W, H) in ASPECTS.items():
-            out = OUT / "shots" / f"shot_{s['id']}_{asp}.mp4"
+            out = shots_dir / f"shot_{s['id']}_{asp}.mp4"
             d = digest(src, s["camera"], dur, asp, fhash(wan if src == "wan" else key))
-            if is_fresh(f"shot:{s['id']}:{asp}", d, out):
+            cache_key = f"shot:{lang}:{s['id']}:{asp}"
+            if is_fresh(cache_key, d, out):
                 print(f"shot {s['id']} {asp}: cached"); continue
             t = time.time()
             if src == "wan":
                 vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},tpad=stop_mode=clone:stop_duration=10,format=yuv420p"
                 ff(["-i", str(wan), "-vf", vf, "-t", str(dur), "-an", "-c:v", "libx264", "-crf", "20", str(out)])
             else:
-                ff(["-loop", "1", "-i", str(key), "-vf", kb_filter(s["camera"], W, H, int(dur * FPS)),
+                ff(["-loop", "1", "-i", str(key), "-vf", kb_filter(s["camera"], W, H, int(round(dur * FPS))),
                     "-t", str(dur), "-an", "-c:v", "libx264", "-crf", "20", str(out)])
-            log_run("shots", f"ffmpeg-{src}", s["id"], {"aspect": asp, "dur": dur, "camera": s["camera"]}, None, time.time() - t)
-            mark(f"shot:{s['id']}:{asp}", d); print(f"shot {s['id']} {asp}: rendered ({src})")
+            log_run("shots", f"ffmpeg-{src}", s["id"], {"aspect": asp, "lang": lang, "dur": dur, "camera": s["camera"]}, None, time.time() - t)
+            mark(cache_key, d); print(f"shot {s['id']} {asp}: rendered ({src})")
 
 if __name__ == "__main__":
     import sys; main(sys.argv[1] if len(sys.argv) > 1 else None)

@@ -1,11 +1,17 @@
 """Stage: assembly. Narration timed to shots, music ducked under voice, bilingual opening
 title, subtitles, and AI end card with smooth ASS fades, loudness normalization, and 9:16 + 16:9 exports.
 `python -m pipeline.assemble radio` builds the subtitled radio cut."""
-import sys, textwrap, time
+import subprocess, sys, textwrap, time
 from pipeline.common import *
 from pipeline.shots import ASPECTS
 
 FONT = "Ebrima"  # Includes crisp Ethiopic (Ge'ez) and Latin glyphs on Windows
+
+
+def media_duration(path):
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                       capture_output=True, text=True)
+    return float(r.stdout.strip()) if r.returncode == 0 and r.stdout.strip() else 0.0
 
 
 def ff_path(p):
@@ -124,10 +130,11 @@ def main(mode="film"):
         log_run("assemble", "ffmpeg", None, {"mode": "radio", "lang": LANG(), "music": kind, "seconds": total}, None, time.time() - t0)
         print(f"radio cut: {total:.1f}s (music: {kind})"); return
     fade_d = 0.65
+    shots_dir = OUT / "shots" / LANG()
     for asp, (W, H) in ASPECTS.items():
-        clips = [OUT / "shots" / f"shot_{s['id']}_{asp}.mp4" for s in sb["shots"]]
+        clips = [shots_dir / f"shot_{s['id']}_{asp}.mp4" for s in sb["shots"]]
         missing = [c.name for c in clips if not c.exists()]
-        if missing: raise SystemExit(f"missing shot clips (run keyframes + shots first): {missing[:3]}...")
+        if missing: raise SystemExit(f"missing shot clips in {shots_dir} (run keyframes + shots first): {missing[:3]}...")
         ass_p = work / f"overlay_{asp}_{LANG()}.ass"
         wrap_w = 32 if asp == "9x16" else 44
         end_w = 28 if asp == "9x16" else 44
@@ -136,7 +143,7 @@ def main(mode="film"):
         write_ass(ass_p, W, H, title_cue, build_bilingual_cues(sb, durs, wrap_w), (body + 0.15, total - 0.15, end_txt), sizes)
         endclip = work / f"end_{asp}.mp4"
         ff(["-f", "lavfi", "-i", f"color=c=0x0a0a0a:s={W}x{H}:r=24:d={end}", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(endclip)])
-        # Pad each clip tail by fade_d before xfade so every shot transition stays synced to narration.
+        # Ensure every pre-xfade clip spans at least cd + fade_d via clone padding + trim so xfade never aborts early.
         all_clips = clips + [endclip]
         clip_durs = durs + [end]
         inputs = []
@@ -144,8 +151,11 @@ def main(mode="film"):
             inputs += ["-i", str(c)]
         fc_parts = []
         for idx, cd in enumerate(clip_durs):
-            pad = f",tpad=stop_mode=clone:stop_duration={fade_d}" if idx < len(all_clips) - 1 else ""
-            fc_parts.append(f"[{idx}:v]setpts=PTS-STARTPTS,fps=24,format=yuv420p{pad}[v{idx}]")
+            target_len = cd + fade_d if idx < len(all_clips) - 1 else cd
+            fc_parts.append(
+                f"[{idx}:v]setpts=PTS-STARTPTS,fps=24,format=yuv420p,"
+                f"tpad=stop_mode=clone:stop_duration={fade_d + 5:.2f},trim=duration={target_len:.3f},setpts=PTS-STARTPTS[v{idx}]"
+            )
         cur = "v0"
         offset = 0.0
         for idx in range(len(all_clips) - 1):
@@ -166,7 +176,10 @@ def main(mode="film"):
                      "-map", "[vout]", "-map", f"{a_idx}:a",
                      "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "24",
                      "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)])
-        print(f"{out.name}: {total:.1f}s (music: {kind})")
+        actual = media_duration(out)
+        if abs(actual - total) > 0.6:
+            raise RuntimeError(f"{out.name} duration mismatch: expected {total:.2f}s, got {actual:.2f}s")
+        print(f"{out.name}: {actual:.2f}s (expected {total:.2f}s, music: {kind})")
     log_run("assemble", "ffmpeg", None, {"mode": "film", "lang": LANG(), "music": kind, "seconds": total}, None, time.time() - t0)
 
 

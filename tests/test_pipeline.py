@@ -99,6 +99,22 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(used, "gemini-3.8-flash-lite-tts")
         self.assertIn("gemini-3.8-flash-tts", exhausted)
 
+    def test_assemble_xfade_pads_short_clip_without_truncation(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as td:
+            out = pathlib.Path(td)
+            (out / "shots" / "am").mkdir(parents=True)
+            (out / "narration" / "am").mkdir(parents=True)
+            clip_dir = out / "shots" / "am"
+            for i, sid in enumerate(("01", "02")):
+                dur_clip = 2.0 if sid == "01" else 3.0  # intentionally shorter than shot_seconds (6s/8s)
+                subprocess.run(
+                    ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "lavfi", "-i", f"color=c=black:s=320x180:r=24:d={dur_clip}", str(clip_dir / f"shot_{sid}_16x9.mp4")],
+                    check=True,
+                )
+            self.assertTrue((clip_dir / "shot_01_16x9.mp4").exists())
+            self.assertGreater(assemble.media_duration(clip_dir / "shot_01_16x9.mp4"), 1.5)
+
 
 if __name__ == "__main__":
     unittest.main()

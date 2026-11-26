@@ -12,7 +12,7 @@ Measure from runs.jsonl: latency per stage, GPU minutes (Kaggle), free-tier limi
 | benchmark_tts (`gemini-3.8-flash` + `lite`) | 6 (6 ok) | 77.55 s | 0 | $0.00 (AI Studio free tier) |
 | keyframes (`@cf/black-forest-labs/flux-2-klein-4b`, all iterations) | 52 (52 ok) | 500.58 s | 0 | $0.00 (~$0.0014/img list on CF, ~$0.015 on BFL) |
 | benchmark_image (`@cf/black-forest-labs/flux-1-schnell`) | 2 (2 ok) | 64.30 s | 0 | $0.00 (Cloudflare free tier) |
-| shots (`ffmpeg-kenburns`, all iterations) | 168 (168 ok) | 1920.89 s | 0 (local) | $0.00 |
+| shots (`ffmpeg-kenburns`, all iterations) | 208 (208 ok) | 2258.75 s | 0 (local) | $0.00 |
 | wan (`Wan 2.2 TI2V-5B`, Kaggle) | TBD | TBD | TBD | TBD (~$0.05/5s 480p, ~$0.10/5s 720p WaveSpeed ref) |
 | music (`ACE-Step 1.5`, Kaggle) | TBD | TBD | TBD | TBD (~$0.027/90s WaveSpeed ref) |
-| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 24 (24 ok) | 2073.49 s | 0 (local) | $0.00 |
+| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 26 (26 ok) | 2239.57 s | 0 (local) | $0.00 |

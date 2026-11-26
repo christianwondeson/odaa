@@ -33,7 +33,7 @@ def list_shots() -> list[dict]:
             "refs": s.get("refs", []),
             "has_narration": (OUT / "narration" / lang / f"shot_{s['id']}.wav").exists(),
             "has_keyframe": (OUT / "keyframes" / f"shot_{s['id']}.jpg").exists(),
-            "has_clip_9x16": (OUT / "shots" / f"shot_{s['id']}_9x16.mp4").exists(),
+            "has_clip_9x16": (OUT / "shots" / lang / f"shot_{s['id']}_9x16.mp4").exists(),
         }
         for s in sb["shots"]
     ]
