@@ -1,5 +1,5 @@
 """All third-party API calls live here, so a model change touches one file."""
-import base64, io, os, pathlib, requests, subprocess, tempfile, time, wave
+import base64, io, os, pathlib, requests, subprocess, tempfile, time, uuid, wave
 
 GEMINI = "https://generativelanguage.googleapis.com/v1beta"
 WAVESPEED = "https://api.wavespeed.ai/api/v3"
@@ -57,7 +57,7 @@ def hasab_tts(text, lang="am", speaker_name=None, sample_rate=22500):
     return _to_wav(r.content, ".wav")
 
 
-def addis_tts(text, lang="am", voice_id=None):
+def addis_tts(text, lang="am", voice_id=None, client_request_id=None):
     """Synthesize speech via Addis AI (`POST /api/v1/voice/generations`). Returns RIFF WAV bytes."""
     api_key = os.environ["ADDIS_API_KEY"]
     voice = voice_id or os.environ.get("ADDIS_TTS_VOICE") or ADDIS_DEFAULT_VOICE.get(lang, "am-hamen")
@@ -65,6 +65,7 @@ def addis_tts(text, lang="am", voice_id=None):
         "voice_id": voice,
         "language": ADDIS_LANG.get(lang, lang),
         "text": text,
+        "client_request_id": client_request_id or str(uuid.uuid4()),
     }
     r = requests.post(
         f"{ADDIS}/voice/generations",
@@ -72,15 +73,17 @@ def addis_tts(text, lang="am", voice_id=None):
         json=payload,
         timeout=120,
     )
-    r.raise_for_status()
+    if not r.ok:
+        raise RuntimeError(f"Addis AI {r.status_code}: {r.text[:300]}")
     ctype = r.headers.get("content-type", "").lower()
     if "application/json" not in ctype:
         return _to_wav(r.content, ".mp3")
     j = r.json()
-    b64 = j.get("audio_base64") or j.get("audio") or (j.get("data") or {}).get("audio")
+    data = j.get("data") if isinstance(j.get("data"), dict) else j
+    b64 = j.get("audio_base64") or j.get("audio") or data.get("audio_base64") or data.get("audio")
     if b64:
         return _to_wav(base64.b64decode(b64), ".mp3")
-    audio_url = j.get("audio_url") or j.get("url") or (j.get("data") or {}).get("url")
+    audio_url = j.get("audio_url") or j.get("url") or data.get("audio_url") or data.get("url")
     if audio_url:
         dl = requests.get(audio_url, timeout=120)
         dl.raise_for_status()

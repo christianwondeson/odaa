@@ -8,7 +8,7 @@
 - [ ] Radio cut + user test 1 (3+ people; `radio_cut_am.mp4` `84.8 s` and `radio_cut_oro.mp4` `86.3 s` built; user test pending)
 - [x] Reference sheet + keyframes (v4: unified 35mm golden-ochre/emerald look; Odaa tree motif woven continuously across shots `01`, `02`, `06`, `08`, `09`, `10`)
 - [x] Animated Ken Burns + cinematic film assembly (`film_9x16.mp4` & `film_16x9.mp4` `87.74 s`, `radio_cut_am.mp4` `85.24 s`; `film_9x16_oro.mp4` & `film_16x9_oro.mp4` `88.82 s`, `radio_cut_oro.mp4` `86.32 s`; unified FFmpeg color grade, `0.65s` `xfade` + `fadeblack` dip before `shot_07`; Wan 2.2 & ACE-Step pending)
-- [x] Option A tooling: Hasab AI & Addis AI TTS adapters (`pipeline/providers.py`), `TTS_PROVIDER` routing (`pipeline/narration.py`), A/B benchmark CLI (`pipeline/benchmark_tts.py`), and offline unit suite (`tests/test_pipeline.py` — `5/5` passing) — live E12 audio test awaits `HASAB_API_KEY` / `ADDIS_API_KEY` in `.env`
+- [x] Option A (`E12`) live TTS benchmark across **Gemini**, **Hasab AI**, and **Addis AI** (`am` shots `08`/`09` and `oro` shots `01`/`06` saved to `outputs/benchmarks/tts/`; `4/4` Addis & `8/8` Hasab ok after fixing `F09` `client_request_id`; blind native-listener 1–5 rating + final voice choice pending)
 - [ ] Wan 2.2 clips (Kaggle)
 - [ ] ACE-Step candidates (3) + choice
 - [ ] User test 2 (3+ people)

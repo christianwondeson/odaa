@@ -42,6 +42,8 @@ class PipelineTests(unittest.TestCase):
                 with patch.dict("os.environ", {"NARRATION_LANG": "oro"}):
                     self.assertEqual(common.narration_audio_path("08"), out / "narration" / "oro" / "shot_08.wav")
                     self.assertAlmostEqual(common.narration_tempo("08"), 1.22)
+                with patch.dict("os.environ", {"NARRATION_LANG": "oro", "TTS_PROVIDER": "addis"}):
+                    self.assertEqual(common.narration_tempo("08"), 1.0)
 
     def test_ff_path_and_bilingual_cues(self):
         escaped = assemble.ff_path(pathlib.Path("outputs/work/test.ass"))
@@ -68,13 +70,14 @@ class PipelineTests(unittest.TestCase):
                 self.assertEqual(kwargs["json"]["speaker_name"], "Selam")
 
             with patch("pipeline.providers.requests.post") as mock_post:
-                resp = MagicMock(status_code=200, content=mp3_bytes, headers={"content-type": "audio/mpeg"})
+                resp = MagicMock(ok=True, status_code=200, content=mp3_bytes, headers={"content-type": "audio/mpeg"})
                 mock_post.return_value = resp
                 wav = providers.addis_tts("Nagaa", lang="oro")
                 self.assertEqual(wav[:4], b"RIFF")
                 _, kwargs = mock_post.call_args
                 self.assertEqual(kwargs["json"]["language"], "om")
                 self.assertEqual(kwargs["json"]["voice_id"], "om-ayyaantuu")
+                self.assertTrue(kwargs["json"]["client_request_id"])
                 self.assertEqual(kwargs["headers"]["x-api-key"], "ak_test")
 
     def test_tts_chain_switches_on_daily_quota(self):

@@ -54,10 +54,15 @@ Hypothesis: Conditioning Shots `01`, `02`, `06`, `08`, `09`, `10` jointly on `re
 Change: Updated `storyboard.json`, `pipeline/keyframes.py`, `pipeline/shots.py`, and `pipeline/assemble.py`; caught and fixed a 4-arm prompt artifact on `shot_07` (`seed 3007 -> 3107`).
 Result: All 10 keyframes and both `87.74s` films (`film_9x16.mp4`, `film_16x9.mp4`) now share cohesive color, character identity, and continuous Odaa tree visual links.
 
-## E12 - Option A: Ethiopian-native TTS adapters (Hasab AI & Addis AI) vs. Gemini TTS on clarity-sensitive shots (`08`, `09`)
-Hypothesis: Purpose-built Ethiopian speech APIs (Hasab AI `Selam`/`Lemlem` and Addis AI `am-hamen`/`om-ayyaantuu`) pronounce Amharic `ሥሯ` (Shot 08) and `በግልጽ` / cadence (Shot 09) as well as Afaan Oromoo ejectives more naturally than general-purpose Gemini TTS.
-Change: Added `hasab_tts()` and `addis_tts()` with MP3-to-WAV normalization in `pipeline/providers.py`, `TTS_PROVIDER` routing (`gemini`/`hasab`/`addis`/`auto`) in `pipeline/narration.py`, language-scoped `outputs/voice_override/<lang>/` in `pipeline/common.py`, `pipeline/benchmark_tts.py`, and mocked API tests in `tests/test_pipeline.py`.
-Result: Offline adapter/fallback unit tests pass (`5/5`) and existing `gemini-3.8-flash-tts` raw WAV baselines are measured (`shot_08`: `7.27s` raw / `~5.96s` at `1.22x`; `shot_09`: `9.85s` raw / `~8.07s` at `1.22x`); live Hasab AI & Addis AI audio samples and native listener 1–5 ratings are pending adding `HASAB_API_KEY` / `ADDIS_API_KEY` to `.env` and running `python -m pipeline.benchmark_tts`.
+## E12 - Option A: Ethiopian-native TTS adapters (Hasab AI & Addis AI) vs. Gemini TTS on clarity-sensitive shots (`am` `08`/`09`, `oro` `01`/`06`)
+Hypothesis: Purpose-built Ethiopian speech APIs (Hasab AI `Selam`/`Lemlem` and Addis AI `am-hamen`/`om-ayyaantuu`) pronounce Amharic `ሥሯ` (Shot 08) and `በግልጽ` / cadence (Shot 09) as well as Afaan Oromoo ejectives more naturally and at lower latency than general-purpose Gemini TTS.
+Change: Added `hasab_tts()` and `addis_tts()` (with `client_request_id` + FFmpeg WAV normalization) in `pipeline/providers.py`, `TTS_PROVIDER` routing in `pipeline/narration.py`, `pipeline/benchmark_tts.py`, and native `1.0x` tempo for Hasab/Addis in `pipeline/common.py`. Ran `python -m pipeline.benchmark_tts` across `am` (`08`, `09`) and `oro` (`01`, `06`).
+Result: Both Ethiopian providers were **2–6x faster** than Gemini and required no `1.22x` speedup:
+- `am` Shot `08`: `hasab:Selam` `3.80s` latency / `4.16s` audio (`4.08s`–`5.68s` across 3 runs); `addis:am-hamen` `3.57s` / `4.36s`; `gemini-3.8-flash-tts` `11.65s` / `6.46s` (`7.27s` existing WAV); `gemini-3.8-flash-lite-tts` `9.73s` / `5.97s`.
+- `am` Shot `09`: `hasab:Selam` `4.95s` latency / `7.50s` audio; `addis:am-hamen` `4.93s` / `6.71s`; `gemini-3.8-flash-tts` `9.75s` / `9.26s` (`9.85s` existing WAV); `gemini-3.8-flash-lite-tts` `31.39s` / `8.03s`.
+- `oro` Shot `01`: `hasab:Lemlem` `4.45s` / `5.68s` audio; `addis:om-ayyaantuu` `3.49s` / `4.78s` audio (vs. existing Gemini `8.33s`).
+- `oro` Shot `06`: `hasab:Lemlem` `4.95s` / `7.78s` audio; `addis:om-ayyaantuu` `4.47s` / `7.24s` audio (vs. existing Gemini `9.49s`).
+All comparison WAVs saved under `outputs/benchmarks/tts/{am,oro}/`; blind native-listener pronunciation & naturalness rating (1–5) pending listening by fluent Amharic/Oromo speakers.
 
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

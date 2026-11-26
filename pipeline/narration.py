@@ -1,5 +1,5 @@
 """Stage: narration. One WAV per shot per language via Gemini TTS, Hasab AI, or Addis AI. Cached per shot."""
-import time, requests
+import time, uuid, requests
 from pipeline.common import *
 from pipeline.providers import gemini_tts, hasab_tts, addis_tts, HASAB_DEFAULT_SPEAKER, ADDIS_DEFAULT_VOICE
 
@@ -20,7 +20,8 @@ def _synthesize_local_provider(provider, text, lang):
         return retry(lambda: hasab_tts(text, lang, spk)), f"hasab:{spk}"
     if provider == "addis":
         vid = os.environ.get("ADDIS_TTS_VOICE") or ADDIS_DEFAULT_VOICE.get(lang, "am-hamen")
-        return retry(lambda: addis_tts(text, lang, vid)), f"addis:{vid}"
+        req_id = str(uuid.uuid4())  # reuse idempotency key across retry attempts
+        return retry(lambda: addis_tts(text, lang, vid, client_request_id=req_id)), f"addis:{vid}"
     raise ValueError(f"unknown TTS provider: {provider}")
 
 

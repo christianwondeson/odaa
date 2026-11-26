@@ -89,10 +89,14 @@ def narration_audio_path(shot_id):
 
 
 def narration_tempo(shot_id):
-    """Keep human voice overrides at 1.0x; normalize slow TTS phrasing to fit 60-90s."""
+    """Keep human overrides and native-paced providers (Hasab/Addis) at 1.0x unless NARRATION_TEMPO is set."""
+    if os.environ.get("NARRATION_TEMPO"):
+        return float(os.environ["NARRATION_TEMPO"])
     if _find_voice_override(shot_id) is not None:
         return 1.0
-    return float(os.environ.get("NARRATION_TEMPO", "1.22"))
+    if os.environ.get("TTS_PROVIDER", "gemini").strip().lower() in ("hasab", "addis"):
+        return 1.0
+    return 1.22
 
 
 LANG = lambda: os.environ.get("NARRATION_LANG", "am")
