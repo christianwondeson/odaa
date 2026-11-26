@@ -32,11 +32,16 @@
 - **Agent Tooling (`E10`):** Packaged validation, shot inspection, single-shot regeneration, and `build_film` as an **MCP Server** ([pipeline/mcp_server.py](pipeline/mcp_server.py)) so any coding agent can operate the studio cleanly.
 
 ## 6. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
-- Measured across `404` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`50/57` ok across 3 models, `809.83s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`232/232` ok, `2495.83s`), `assemble` (`34/34` ok, `2791.85s`), and `720p` mobile exports (`5/5` ok, `101.53s`).
+- Measured across `405` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`50/57` ok across 3 models, `809.83s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`232/232` ok, `2495.83s`), `assemble` (`35/35` ok, `2872.08s`), and `720p` mobile exports (`5/5` ok, `101.53s`).
 - Documented `11` real blockers (`F01`–`F11`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, Addis AI's undocumented `client_request_id` requirement (`422`), `shot_06`'s crossed-knee extra-arm artifact, and shared `outputs/shots/` truncation under `xfade`.
 - **Kaggle GPU (`Wan 2.2` / `ACE-Step`):** `(TO FILL if run: GPU minutes, outputs/music/chosen.wav choice, Wan vs Ken Burns takeaway.)`
 
-## 7. Ethics, Consent & Links (`ETHICS.md`)
+## 7. What I Would Build Next
+1. **Replace synthetic TTS comedy with hybrid human/local-AI voice (`outputs/voice_override/`):** Pair Hasab AI's cleaner Amharic/Oromo pronunciation with either a real voice actor or mother's narrated read so listeners feel deeper emotional warmth instead of "funny" synthetic inflection.
+2. **Swap placeholder score & still motion for Kaggle `ACE-Step 1.5` + `Wan 2.2`:** Render three acoustic *krar*/string score candidates (`chosen.wav`) and animate hero emotional beats (`04`, `06`, `07`, `10`) with Wan 2.2 TI2V-5B, then run a 5-person blind preference test on `E09`.
+3. **Zero-code web studio & showcase:** Deploy a Next.js + Vercel screening room for family reviewers with language/aspect toggles (`9:16`, `16:9`, `radio_cut`) and drag-and-drop preview uploads backed by the pipeline's MCP server (`pipeline/mcp_server.py`).
+
+## 8. Ethics, Consent & Links (`ETHICS.md`)
 - **Consent & Native Review:** `(TO FILL: date mother approved story inspiration; confirmation that `am` and `oro` scripts + proverb were reviewed and set `reviewed: true`.)`
 - **Deliverable Links:**
   - Repository: https://github.com/christianwondeson/odaa

@@ -15,5 +15,5 @@ Measure from runs.jsonl: latency per stage, GPU minutes (Kaggle), free-tier limi
 | shots (`ffmpeg-kenburns`, all iterations) | 232 (232 ok) | 2495.83 s | 0 (local) | $0.00 |
 | wan (`Wan 2.2 TI2V-5B`, Kaggle) | TBD | TBD | TBD | TBD (~$0.05/5s 480p, ~$0.10/5s 720p WaveSpeed ref) |
 | music (`ACE-Step 1.5`, Kaggle) | TBD | TBD | TBD | TBD (~$0.027/90s WaveSpeed ref) |
-| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 34 (34 ok) | 2791.85 s | 0 (local) | $0.00 |
+| assemble (`ffmpeg`: `radio` + `film`, `am` + `oro`) | 35 (35 ok) | 2872.08 s | 0 (local) | $0.00 |
 | assemble (`ffmpeg-mobile`: 720p share, `am` + `oro`) | 5 (5 ok) | 101.53 s | 0 (local) | $0.00 |
