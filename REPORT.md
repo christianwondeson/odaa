@@ -1,6 +1,6 @@
 # Report — Under the Odaa (በኦዳ ዛፍ ሥር)
 
-> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E16`, and failure logs `F01`–`F11` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require User Test 2 playback feedback, optional Kaggle GPU outputs, and final publish links before submission.
+> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E16`, failure logs `F01`–`F11`, walkthrough video, and public TikTok post below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Items still marked `(TO FILL)` reflect optional Kaggle GPU runs and `User Test 2` (`3+` phone viewers on the revised `88.12 s` / `11.84 MB` cut).
 
 ## 1. Story, Audience, and Why This Film Exists
 - **Title:** *Under the Odaa / በኦዳ ዛፍ ሥር* (`9:16` vertical primary for WhatsApp/TikTok, plus `16:9` widescreen).
@@ -49,5 +49,5 @@
 - **Consent & Native Review:** Mother informed and consented directly on `26 Nov 2026` (private consent record kept offline, not published); Amharic script reviewed across `E12`, `E13`, `E15`, `E16` (`am`: `reviewed=true`); Afaan Oromoo (`oro`) & Odaa proverb remain `reviewed=false` pending an independent fluent Oromo audit.
 - **Deliverable Links:**
   - Repository: https://github.com/christianwondeson/odaa
-  - Walkthrough video: `(TO FILL)`
+  - Walkthrough video: https://www.loom.com/share/74fdf0861cd84ae39ee8b21a953050e6
   - Public AI-labeled post: https://www.tiktok.com/@christianwondeson/video/7712532010245360902

@@ -12,5 +12,5 @@
 - [ ] Wan 2.2 clips (Kaggle)
 - [ ] ACE-Step candidates (3) + choice
 - [ ] User test 2 (3+ people)
-- [ ] Walkthrough, post, report (`REPORT.md` + `REPORT.pdf` generated; public TikTok post live at https://www.tiktok.com/@christianwondeson/video/7712532010245360902; `<=5 min` walkthrough video pending)
+- [x] Walkthrough, post, report (`REPORT.md` + `REPORT.pdf` generated; Loom walkthrough `https://www.loom.com/share/74fdf0861cd84ae39ee8b21a953050e6`; TikTok post `https://www.tiktok.com/@christianwondeson/video/7712532010245360902`)
 Model ids marked "CHECK" in pipeline/*.py (TTS model, FLUX model) must be confirmed against provider docs on the day.
