@@ -52,7 +52,12 @@ Result: Verified `mcp.list_tools()` registers all 4 tools and `validate_storyboa
 ## E11 - Unifying Odaa visual continuity, 35mm color grade, and `fadeblack` dramatic pacing
 Hypothesis: Conditioning Shots `01`, `02`, `06`, `08`, `09`, `10` jointly on `ref_odaa` + `ref_girl`/`ref_woman`, locking a 35mm golden-ochre/emerald `style_block`, adding unified FFmpeg `eq`+`colorbalance` grading, and using a `0.65s` `fadeblack` dip before the `shot_07` breakthrough removes visual disjointedness and improves cinematic flow.
 Change: Updated `storyboard.json`, `pipeline/keyframes.py`, `pipeline/shots.py`, and `pipeline/assemble.py`; caught and fixed a 4-arm prompt artifact on `shot_07` (`seed 3007 -> 3107`).
-Result: All 10 keyframes and both `87.28s` films (`film_9x16.mp4` 35.9 MB, `film_16x9.mp4` 33.6 MB) now share cohesive color, character identity, and continuous Odaa tree visual links.
+Result: All 10 keyframes and both `87.74s` films (`film_9x16.mp4`, `film_16x9.mp4`) now share cohesive color, character identity, and continuous Odaa tree visual links.
+
+## E12 - Option A: Ethiopian-native TTS adapters (Hasab AI & Addis AI) vs. Gemini TTS on clarity-sensitive shots (`08`, `09`)
+Hypothesis: Purpose-built Ethiopian speech APIs (Hasab AI `Selam`/`Lemlem` and Addis AI `am-hamen`/`om-ayyaantuu`) pronounce Amharic `ሥሯ` (Shot 08) and `በግልጽ` / cadence (Shot 09) as well as Afaan Oromoo ejectives more naturally than general-purpose Gemini TTS.
+Change: Added `hasab_tts()` and `addis_tts()` with MP3-to-WAV normalization in `pipeline/providers.py`, `TTS_PROVIDER` routing (`gemini`/`hasab`/`addis`/`auto`) in `pipeline/narration.py`, language-scoped `outputs/voice_override/<lang>/` in `pipeline/common.py`, `pipeline/benchmark_tts.py`, and mocked API tests in `tests/test_pipeline.py`.
+Result: Offline adapter/fallback unit tests pass (`5/5`) and existing `gemini-3.8-flash-tts` raw WAV baselines are measured (`shot_08`: `7.27s` raw / `~5.96s` at `1.22x`; `shot_09`: `9.85s` raw / `~8.07s` at `1.22x`); live Hasab AI & Addis AI audio samples and native listener 1–5 ratings are pending adding `HASAB_API_KEY` / `ADDIS_API_KEY` to `.env` and running `python -m pipeline.benchmark_tts`.
 
 ## Candidate experiments
-3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS; 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).
+3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

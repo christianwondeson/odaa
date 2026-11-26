@@ -3,11 +3,11 @@
 - **One-command orchestrator:** `pipeline/run.py` (`python -m pipeline.run` for full film, `python -m pipeline.run radio` for radio cut) runs `script/validate -> narration -> keyframes -> shots -> music -> assemble`.
 - **Stages:** Independent scripts (`script.py`, `narration.py`, `keyframes.py`, `shots.py`, `music.py`, `assemble.py`) reading `storyboard.json` and writing `outputs/<stage>/`.
 - **Caching:** Key = `stage:shot(:aspect)` in `outputs/.cache.json`; value = SHA-256 of inputs (prompt, seed, model, camera, duration, source file hash). Unchanged shots skip cleanly.
-- **Timing & voice override:** `shot_seconds` sizes each shot from its active audio duration (`outputs/voice_override/shot_XX.{wav,mp3,m4a}` if present, else `outputs/narration/<lang>/shot_XX.wav`) + `0.7s` pad, floored at `min_seconds`.
+- **Timing & voice override:** `shot_seconds` sizes each shot from its active audio duration (`outputs/voice_override/<lang>/shot_XX.{wav,mp3,m4a,ogg}` if present, else `outputs/voice_override/shot_XX.*`, else `outputs/narration/<lang>/shot_XX.wav` at `NARRATION_TEMPO=1.22`) + `0.25s` pad, floored at `min_seconds`.
 - **Failure handling:**
   - `retry()` with exponential backoff (3 tries) and `runs.jsonl` error logging.
-  - 3-model TTS fallback chain in `narration.py` (`gemini-3.8-flash-tts` -> `gemini-3.8-flash-lite-tts` -> `gemini-2.5-flash-preview-tts`) on `429` daily quota or unavailability, plus RPM pacing.
+  - Multi-provider narration in `narration.py`: default `TTS_PROVIDER=gemini` uses the 3-model Gemini fallback chain (`gemini-3.8-flash-tts` -> `gemini-3.8-flash-lite-tts` -> `gemini-2.5-flash-preview-tts`) on `429` daily quota or unavailability, plus RPM pacing; optional `TTS_PROVIDER=hasab|addis|auto` routes Amharic/Oromo through Hasab AI (`POST /api/v1/tts/synthesize`) or Addis AI (`POST /api/v1/voice/generations`).
   - Video fallback: uses `outputs/wan/shot_XX.mp4` (Kaggle `notebooks/wan22_kaggle.ipynb` or optional WaveSpeed when `WAVESPEED_API_KEY` + `ENABLE_WAVESPEED=1`), else eased 3× oversampled FFmpeg Ken Burns.
   - Music fallback: uses `outputs/music/chosen.wav` (Kaggle `notebooks/acestep_kaggle.ipynb` or WaveSpeed `--generate`), else quiet placeholder pad.
-- **Assembly:** `0.45s` `xfade` dissolves, `sidechaincompress` ducking, `loudnorm` (`-14 LUFS`, `-1 dBTP`), bilingual Amharic+English opening title, subtitles, and AI end card (`Ebrima`) in `9:16` and `16:9`.
+- **Assembly:** `0.65s` `xfade` dissolves (`fadeblack` dip before `shot_07` breakthrough and closing EndCard), `sidechaincompress` ducking, `loudnorm` (`-14 LUFS`, `-1 dBTP`), bilingual Amharic/Oromo + English opening title, subtitles, and AI end card (`Ebrima`) in `9:16` and `16:9`.
 - **Secrets & build artifacts:** `.env` only, git-ignored (`outputs/work/`, `outputs/smoke/`, `outputs/shots/`, `outputs/final/`, `outputs/.cache.json` are also git-ignored so heavy MP4 renders don't bloat the repo).

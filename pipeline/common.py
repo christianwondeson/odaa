@@ -11,7 +11,7 @@ def load_env():
     """Read .env (never committed) into os.environ."""
     p = ROOT / ".env"
     if p.exists():
-        for line in p.read_text().splitlines():
+        for line in p.read_text(encoding="utf-8").splitlines():
             if "=" in line and not line.strip().startswith("#"):
                 k, v = line.split("=", 1)
                 os.environ.setdefault(k.strip(), v.strip())
@@ -72,20 +72,25 @@ def audio_seconds(path):
     return float(r.stdout.strip()) if r.returncode == 0 and r.stdout.strip() else 0.0
 
 
+def _find_voice_override(shot_id):
+    """Locate an optional human voice recording, checking outputs/voice_override/<lang>/ before root."""
+    override_dir = OUT / "voice_override"
+    for base in (override_dir / LANG(), override_dir):
+        for ext in (".wav", ".mp3", ".m4a", ".ogg"):
+            cand = base / f"shot_{shot_id}{ext}"
+            if cand.exists():
+                return cand
+    return None
+
+
 def narration_audio_path(shot_id):
     """Prefer an optional human voice override in outputs/voice_override/ if present, else generated TTS."""
-    override_dir = OUT / "voice_override"
-    for ext in (".wav", ".mp3", ".m4a", ".ogg"):
-        cand = override_dir / f"shot_{shot_id}{ext}"
-        if cand.exists():
-            return cand
-    return OUT / "narration" / LANG() / f"shot_{shot_id}.wav"
+    return _find_voice_override(shot_id) or (OUT / "narration" / LANG() / f"shot_{shot_id}.wav")
 
 
 def narration_tempo(shot_id):
     """Keep human voice overrides at 1.0x; normalize slow TTS phrasing to fit 60-90s."""
-    override_dir = OUT / "voice_override"
-    if any((override_dir / f"shot_{shot_id}{ext}").exists() for ext in (".wav", ".mp3", ".m4a", ".ogg")):
+    if _find_voice_override(shot_id) is not None:
         return 1.0
     return float(os.environ.get("NARRATION_TEMPO", "1.22"))
 

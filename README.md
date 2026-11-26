@@ -6,7 +6,10 @@ A 60–90 s illustrated short film (9:16 and 16:9), narrated in Amharic (with Af
 ```bash
 pip install -r requirements.txt && cp .env.example .env   # fill in keys: see docs/ACCOUNTS.md
 python -m pipeline.check_env        # verify credentials (never prints keys)
+python -m pipeline.validate         # validate storyboard.json contract & review flags
+python -m unittest discover -s tests # run offline pipeline unit tests
 python -m pipeline.smoke_test       # one call per provider, logs latency to runs.jsonl
+python -m pipeline.benchmark_tts --include-existing  # compare TTS providers on shots 08 & 09
 python -m pipeline.run radio        # validate -> narration -> subtitled radio cut
 python -m pipeline.run              # validate -> narration -> keyframes -> shots -> music -> 9:16 + 16:9 film
 ```
@@ -18,7 +21,8 @@ Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4` (plus `film_9x16_oro.mp4
 | Stage | Script | Model / tool | Runs where |
 |---|---|---|---|
 | script | `pipeline/script.py` | Storyboard contract / Gemini text draft | local / API |
-| narration | `pipeline/narration.py` | Gemini 3.8 Flash TTS (auto-fallback to Flash-Lite TTS) | API |
+| narration | `pipeline/narration.py` | Gemini 3.8 Flash TTS (auto-fallback), optional `TTS_PROVIDER=hasab\|addis\|auto` | API |
+| tts benchmark | `pipeline/benchmark_tts.py` | A/B compare Gemini vs. Hasab AI vs. Addis AI into `outputs/benchmarks/tts/` | API |
 | keyframes | `pipeline/keyframes.py` | FLUX.2 klein 4B on Cloudflare Workers AI | API |
 | moving shots | `pipeline/shots.py` | Wan 2.2 (`outputs/wan/`, Kaggle notebook or optional WaveSpeed), else eased FFmpeg Ken Burns | Kaggle / API / local |
 | music | `pipeline/music.py` + `notebooks/` | ACE-Step 1.5 cue sheet + Kaggle notebook or WaveSpeed (`--generate`) | Kaggle / API |

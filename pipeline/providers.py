@@ -1,8 +1,15 @@
 """All third-party API calls live here, so a model change touches one file."""
-import base64, io, os, requests, time, wave
+import base64, io, os, pathlib, requests, subprocess, tempfile, time, wave
 
 GEMINI = "https://generativelanguage.googleapis.com/v1beta"
 WAVESPEED = "https://api.wavespeed.ai/api/v3"
+HASAB = "https://api.hasab.ai/api/v1"
+ADDIS = "https://api.addisassistant.com/api/v1"
+
+HASAB_LANG = {"am": "amh", "oro": "orm", "en": "eng", "ti": "tir"}
+HASAB_DEFAULT_SPEAKER = {"am": "Selam", "oro": "Lemlem", "en": "Selam", "ti": "Selam"}
+ADDIS_LANG = {"am": "am", "oro": "om", "en": "en", "ti": "ti"}
+ADDIS_DEFAULT_VOICE = {"am": "am-hamen", "oro": "om-ayyaantuu", "ti": "ti-berhane"}
 
 
 def _pcm_to_wav(pcm, rate=24000):
@@ -11,6 +18,74 @@ def _pcm_to_wav(pcm, rate=24000):
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate)
         w.writeframes(pcm)
     return buf.getvalue()
+
+
+def _to_wav(raw, src_ext=".bin"):
+    """Normalize arbitrary encoded audio bytes (e.g., MP3) into 24 kHz mono RIFF WAV via ffmpeg."""
+    if raw[:4] == b"RIFF":
+        return raw
+    with tempfile.TemporaryDirectory() as td:
+        src = pathlib.Path(td) / f"in{src_ext}"
+        dst = pathlib.Path(td) / "out.wav"
+        src.write_bytes(raw)
+        r = subprocess.run(
+            ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(src), "-ar", "24000", "-ac", "1", str(dst)],
+            capture_output=True, text=True,
+        )
+        if r.returncode:
+            raise RuntimeError(f"ffmpeg audio conversion failed: {r.stderr[-300:]}")
+        return dst.read_bytes()
+
+
+def hasab_tts(text, lang="am", speaker_name=None, sample_rate=22500):
+    """Synthesize speech via Hasab AI (`POST /v1/tts/synthesize`). Returns RIFF WAV bytes."""
+    api_key = os.environ["HASAB_API_KEY"]
+    speaker = speaker_name or os.environ.get("HASAB_TTS_SPEAKER") or HASAB_DEFAULT_SPEAKER.get(lang, "Selam")
+    payload = {
+        "text": text,
+        "language": HASAB_LANG.get(lang, lang),
+        "speaker_name": speaker,
+        "sample_rate": int(sample_rate),
+    }
+    r = requests.post(
+        f"{HASAB}/tts/synthesize",
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json=payload,
+        timeout=120,
+    )
+    r.raise_for_status()
+    return _to_wav(r.content, ".wav")
+
+
+def addis_tts(text, lang="am", voice_id=None):
+    """Synthesize speech via Addis AI (`POST /api/v1/voice/generations`). Returns RIFF WAV bytes."""
+    api_key = os.environ["ADDIS_API_KEY"]
+    voice = voice_id or os.environ.get("ADDIS_TTS_VOICE") or ADDIS_DEFAULT_VOICE.get(lang, "am-hamen")
+    payload = {
+        "voice_id": voice,
+        "language": ADDIS_LANG.get(lang, lang),
+        "text": text,
+    }
+    r = requests.post(
+        f"{ADDIS}/voice/generations",
+        headers={"x-api-key": api_key, "Content-Type": "application/json"},
+        json=payload,
+        timeout=120,
+    )
+    r.raise_for_status()
+    ctype = r.headers.get("content-type", "").lower()
+    if "application/json" not in ctype:
+        return _to_wav(r.content, ".mp3")
+    j = r.json()
+    b64 = j.get("audio_base64") or j.get("audio") or (j.get("data") or {}).get("audio")
+    if b64:
+        return _to_wav(base64.b64decode(b64), ".mp3")
+    audio_url = j.get("audio_url") or j.get("url") or (j.get("data") or {}).get("url")
+    if audio_url:
+        dl = requests.get(audio_url, timeout=120)
+        dl.raise_for_status()
+        return _to_wav(dl.content, ".mp3")
+    raise RuntimeError(f"unexpected Addis AI TTS JSON payload: {str(j)[:300]}")
 
 
 def gemini_tts(text, style, voice, model):
