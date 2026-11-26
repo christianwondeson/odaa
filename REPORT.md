@@ -1,6 +1,6 @@
 # Report — Under the Odaa (በኦዳ ዛፍ ሥር)
 
-> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E14`, and failure logs `F01`–`F11` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require real human listening/testing, consent confirmation, optional Kaggle GPU outputs, and final publish links before submission.
+> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E15`, and failure logs `F01`–`F11` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require real human listening/testing, consent confirmation, optional Kaggle GPU outputs, and final publish links before submission.
 
 ## 1. Story, Audience, and Why This Film Exists
 - **Title:** *Under the Odaa / በኦዳ ዛፍ ሥር* (`9:16` vertical primary for WhatsApp/TikTok, plus `16:9` widescreen).
@@ -21,7 +21,7 @@
 ## 4. Reflection & Learning from Audience + Listener Passes (`10 pts`)
 - **Hardest technical problem & solution (`F11`, `F05`, `F07`, `F09`):** Solving silent FFmpeg `xfade` stream truncation at `62.75 s` (`1:02.75`) when `am` and `oro` shared `outputs/shots/`, plus surviving `10 RPD` Gemini TTS caps via a 3-model endpoint chain (`Interactions` WAV vs `generateContent` PCM) and uncovering Addis AI's undocumented `client_request_id` requirement (`422`).
 - **Native Amharic Listener Pass (`E12`, `E13`):** Real playback flagged three exact issues: Shot `03` (`0:19`, `"called her"` -> updated to `"ከሷ ጋር እንድትኖር ስትፈቅድላት"` / *"allowed her to live with her"*), Shot `05` (`0:33`, dense `የታናናሾቿን` -> simplified to `የታናናሽ ልጆቹን`), and Shot `10` (`1:18`, `ጥላ` mispronounced on `2.5-preview` -> regenerated on `3.8-flash-lite-tts`). Comparing providers showed **Hasab AI** pronounced words more accurately, while **Gemini TTS** delivered warmer storytelling cadence (`Gemini` selected for final film).
-- **User Test 1 — Radio Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ names/roles from target audience, verbatim feedback on pacing/emotion/clarity, and exact lines changed in storyboard.json.)`
+- **User Test 1 — Early Cut (`2/3+` logged in `DESIGN.md`, `E15`):** Tester 1 understood the plot cleanly and remembered the mother-past line, but felt only *"a tiny bit of pity"*, noted *"the AI voice was kind of funny"*, and missed the takeaway message. Tester 2 urged narrowing the target audience for greater depth while encouraging the opening Odaa tree and seed line. **Changes made:** narrowed target audience in `DESIGN.md` to young Ethiopian women (16–28) in blended/step-family households, added an explicit self-rescue turning point to Shot `07`, and tied Shot `10` back to the Shot `01` seed & Odaa shelter (`87.64 s` Amharic / `88.54 s` Oromo). *(1+ more tester needed for User Test 1.)*
 - **User Test 2 — Near-Final Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ people watching film_9x16.mp4 on phones, feedback on girl consistency across shots, ending under the Odaa tree, subtitle legibility, and final tweaks made.)`
 
 ## 5. Curiosity Beyond the Floor (`10 pts`)
@@ -32,7 +32,7 @@
 - **Agent Tooling (`E10`):** Packaged validation, shot inspection, single-shot regeneration, and `build_film` as an **MCP Server** ([pipeline/mcp_server.py](pipeline/mcp_server.py)) so any coding agent can operate the studio cleanly.
 
 ## 6. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
-- Measured across `367` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`46/53` ok across 3 models, `743.45s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`208/208` ok, `2258.75s`), `assemble` (`28/28` ok, `2446.37s`), and `720p` mobile exports (`2/2` ok, `41.66s`).
+- Measured across `404` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`50/57` ok across 3 models, `809.83s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`232/232` ok, `2495.83s`), `assemble` (`34/34` ok, `2791.85s`), and `720p` mobile exports (`5/5` ok, `101.53s`).
 - Documented `11` real blockers (`F01`–`F11`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, Addis AI's undocumented `client_request_id` requirement (`422`), `shot_06`'s crossed-knee extra-arm artifact, and shared `outputs/shots/` truncation under `xfade`.
 - **Kaggle GPU (`Wan 2.2` / `ACE-Step`):** `(TO FILL if run: GPU minutes, outputs/music/chosen.wav choice, Wan vs Ken Burns takeaway.)`
 

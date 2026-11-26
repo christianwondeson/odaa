@@ -34,9 +34,9 @@ Read each shot aloud naturally at an unhurried, intimate pace.
 - **Amharic:** በዛ መከራ ውስጥ ዓለም ጨካኝ እንደሆነች ተረዳች፤ ማንም መጥቶ እንደማያድናትም አወቀች።
 - **English:** In those life-crushing days, she realized how cruel the world could be—and that no one was coming to save her.
 
-### Shot 07 (~9s) — Full of Life: Brilliant Student, Speaker & Fast Designer
-- **Amharic:** ግን ሞት የተመኘላት ያቺ ልጅ አልተሸነፈችም። ጎበዝ ተማሪ፣ ድንቅ ተናጋሪ፣ በሕይወት የተሞላችና ፈጣን የዲዛይን ባለሙያ ሆና ወጣች።
-- **English:** Yet the child pushed toward ruin refused to fade. She became a brilliant student, a vivid speaker full of life, and swift with her hands in design.
+### Shot 07 (~9s) — Full of Life: Self-Rescue, Student, Speaker & Designer
+- **Amharic:** ስለዚህ ራሷን ለማዳን ወሰነች። ሕመሟን ወደ ትጋት ቀይራ፣ ጎበዝ ተማሪ፣ ደፋር ተናጋሪና ፈጣን ዲዛይነር ሆና ወጣች።
+- **English:** So she chose to save herself. Turning pain into quiet grit, she excelled at school, spoke boldly, and became a swift designer.
 
 ### Shot 08 (~5s) — Hidden Roots Drinking Deep
 - **Amharic:** በጭቆና ውስጥ ተደብቆ የነበረው ሥሯ ውኃ አግኝቶ በጥልቅ አደገ።
@@ -46,6 +46,6 @@ Read each shot aloud naturally at an unhurried, intimate pace.
 - **Amharic:** ዛሬ የራሷን የዲዛይን ሥራ የምትመራ፣ በግልጽ የምትናገርና ክብሯን የጠበቀች ጠንካራ ሴት ሆናለች።
 - **English:** Today she leads her own design craft—speaking with clarity, standing in dignity, no longer erasing herself to be loved.
 
-### Shot 10 (~9s) — Shelter for the Next Generation
-- **Amharic:** ከመከራ የተረፈች ሴት ለብዙዎች ጥላ ትሆናለች። ዋጋሽ ለሌሎች በምትሰጪው አይለካም፤ አንቺ ሙሉ ሰው ነሽ።
-- **English:** A woman who survives the storm becomes shelter for others. Your worth is never measured by how much you give—you are whole.
+### Shot 10 (~9s) — Seed to Odaa Shelter (Clear Closing Message)
+- **Amharic:** ያችን ትንሽ ዘር አስታውሱ—ራስን ማሳነስ አቁማ፣ ለብዙዎች የሚተርፍ የኦዳ ጥላ ሆነች። ዋጋሽ ለሌሎች በምትሰጪው አይለካም።
+- **English:** Remember that seed—she stopped shrinking to earn love, and grew into the Odaa shelter for many. Your worth is never measured by what you give.

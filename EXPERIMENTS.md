@@ -74,5 +74,10 @@ Hypothesis: Switching slow-motion 24fps illustrated film encoding from `-crf 20`
 Change: Benchmarked `CRF 24`/`25`/`26` (`1080p`) and `720p CRF 24` on `film_9x16.mp4`, inspected `shot_07` PNG frames, updated default `VIDEO_CRF=24 -preset slow -b:a 128k` in `pipeline/assemble.py`, and added `python -m pipeline.assemble mobile`.
 Result: Measured `film_9x16.mp4` dropped from `37.19 MB` (`CRF 20`) to `21.16 MB` (`1080p CRF 24`), `film_16x9.mp4` to `20.68 MB`, `film_9x16_oro.mp4` to `21.75 MB`, and 720p mobile shares (`film_9x16_mobile.mp4` `11.68 MB`, `film_9x16_oro_mobile.mp4` `11.97 MB`), keeping face, sketch ink, and `Ebrima` bilingual subtitles sharp.
 
+## E15 - Acting on Tester 1 & Tester 2 feedback: narrowing audience & bridging Shot 07 -> Shot 10 message
+Hypothesis: Narrowing the audience in `DESIGN.md` to young Ethiopian women (16–28) in blended/step-family households, adding an explicit self-rescue turning point (`"ራሷን ለማዳን ወሰነች"`) in Shot `07`, and closing Shot `10` by echoing Shot `01`'s seed + Odaa shelter resolves Tester 1's lost takeaway message without exceeding `90s`.
+Change: Updated `DESIGN.md`, Shots `07` and `10` in `storyboard.json` and `docs/AMHARIC_SCRIPT.md`, set `oro` default tempo `1.22 -> 1.26` in `pipeline/common.py`, and regenerated only Shots `07` & `10` + rebuilt exports.
+Result: Rebuilt cleanly inside `60–90s`: `film_9x16.mp4` & `film_16x9.mp4` **`87.64s`** (`mobile` `11.66 MB`, `radio_cut_am.mp4` `85.14s`) and `film_9x16_oro.mp4` & `film_16x9_oro.mp4` **`88.54s`** (`mobile` `11.89 MB`, `radio_cut_oro.mp4` `86.04s`). Ready for `Tester 3` & `User test 2`.
+
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

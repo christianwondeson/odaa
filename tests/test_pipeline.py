@@ -41,7 +41,7 @@ class PipelineTests(unittest.TestCase):
                     self.assertEqual(common.narration_tempo("08"), 1.0)
                 with patch.dict("os.environ", {"NARRATION_LANG": "oro"}):
                     self.assertEqual(common.narration_audio_path("08"), out / "narration" / "oro" / "shot_08.wav")
-                    self.assertAlmostEqual(common.narration_tempo("08"), 1.22)
+                    self.assertAlmostEqual(common.narration_tempo("08"), 1.26)
                 with patch.dict("os.environ", {"NARRATION_LANG": "oro", "TTS_PROVIDER": "addis"}):
                     self.assertEqual(common.narration_tempo("08"), 1.0)
 
