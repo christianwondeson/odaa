@@ -4,7 +4,7 @@
 
 ## 1. Story, Audience, and Why This Film Exists
 - **Title:** *Under the Odaa / በኦዳ ዛፍ ሥር* (`9:16` vertical primary for WhatsApp/TikTok, plus `16:9` widescreen).
-- **Audience & Intent (`DESIGN.md`):** Women and girls of my generation (and their families) watching on a phone. Inspired by a real family story, stylized as fictional illustrated 35mm cinema so no private relative is identified without consent.
+- **Audience & Intent (`DESIGN.md`):** Young Ethiopian women (ages 16–28) raised in blended or step-family households carrying silent duty and people-pleasing wounds, watching on a phone (*narrowed from broader "women and girls" after Tester 2 feedback*). Inspired by a real family story with mother's recorded consent (`26 Nov 2026`), stylized as fictional illustrated 35mm cinema.
 - **Storyboard Contract (`storyboard.json`):** Every shot holds an explicit `reason`, reference list (`ref_girl`, `ref_woman`, `ref_odaa`), camera motion, bilingual narration (`am`, `oro`, `en`), and minimum duration floor validated against `schema/storyboard.schema.json`.
 
 ## 2. Architecture & Engineering Practice
@@ -29,7 +29,7 @@
 - **User Test 2 — Near-Final Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ people watching film_9x16.mp4 on phones, feedback on girl consistency across shots, ending under the Odaa tree, subtitle legibility, and final tweaks made.)`
 
 ## 5. Curiosity Beyond the Floor (`10 pts`)
-- **Extra Language (`E01`, `E02`):** Built complete bilingual `storyboard.json`, narration WAVs, subtitles (`am+en` and `oro+en`), radio cuts, and `9:16` / `16:9` MP4s in **Afaan Oromoo** (`89.88 s`) alongside **Amharic** (`88.74 s`), proving empirically where general TTS lacks Oromo support (`F01`).
+- **Extra Language (`E01`, `E02`):** Built complete bilingual `storyboard.json`, narration WAVs, subtitles (`am+en` and `oro+en`), radio cuts, and `9:16` / `16:9` MP4s in **Afaan Oromoo** (`88.74 s`, `mobile` `12.08 MB`) alongside **Amharic** (`88.12 s`, `mobile` `11.84 MB`), proving empirically where general TTS lacks Oromo support (`F01`).
 - **Two Real Model Benchmarks (`E09`, `E12`):**
   - *Image (`E09`):* `@cf/black-forest-labs/flux-2-klein-4b` with `<=512px` portrait refs held character identity cleanly (`~9.6s`/img) vs. `@cf/black-forest-labs/flux-1-schnell` (`4` steps, no refs -> drifted to 2D cartoon in `shot_04` and 3-hand photorealism in `shot_10`).
   - *Speech (`E12`):* Benchmarked **Gemini TTS** vs. **Hasab AI** (`Selam`/`Lemlem`, `3.80–4.95 s`) vs. **Addis AI** (`am-hamen`/`om-ayyaantuu`, `3.49–4.93 s`) across both `am` (`08`/`09`) and `oro` (`01`/`06`), saving all 10 side-by-side WAVs in `outputs/benchmarks/tts/`.
