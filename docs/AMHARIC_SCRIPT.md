@@ -39,11 +39,11 @@ Read each shot aloud naturally at an unhurried, intimate pace.
 - **English:** Yet the child pushed toward ruin refused to fade. She became a brilliant student, a vivid speaker full of life, and swift with her hands in design.
 
 ### Shot 08 (~5s) — Hidden Roots Drinking Deep
-- **Amharic:** በጭቆና ሥር የተደበቀው ሥሯ ውኃ አግኝቶ በጥልቅ ተዘረጋ።
+- **Amharic:** በጭቆና ውስጥ ተደብቆ የነበረው ሥሯ ውኃ አግኝቶ በጥልቅ አደገ።
 - **English:** Beneath the hardest stone, her hidden roots drank deep and held fast.
 
 ### Shot 09 (~8s) — Leading Her Own Design Craft
-- **Amharic:** ዛሬ የራሷን የዲዛይን ሥራ የምትመራ፣ ቃሏ የሚሰማና ራሷን የምታከብር ጠንካራ ሴት ሆናለች።
+- **Amharic:** ዛሬ የራሷን የዲዛይን ሥራ የምትመራ፣ በግልጽ የምትናገርና ክብሯን የጠበቀች ጠንካራ ሴት ሆናለች።
 - **English:** Today she leads her own design craft—speaking with clarity, standing in dignity, no longer erasing herself to be loved.
 
 ### Shot 10 (~9s) — Shelter for the Next Generation
