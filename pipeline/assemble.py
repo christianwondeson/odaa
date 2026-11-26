@@ -21,12 +21,13 @@ def write_srt(path, cues):
             f.write(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{txt}\n\n")
 
 def build_bilingual_cues(sb, durs, width):
-    """Build (start, end, Amharic + English) subtitle cues timed to each shot."""
+    """Build (start, end, active language + English) subtitle cues timed to each shot."""
     cues, t = [], 0.0
+    lang = LANG()
     for s, d in zip(sb["shots"], durs):
-        am = "\n".join(textwrap.wrap(s["narration"].get("am", "").strip(), width))
+        pri = "\n".join(textwrap.wrap(s["narration"].get(lang, "").strip(), width))
         en = "\n".join(textwrap.wrap(s["narration"]["en"].strip(), width))
-        txt = f"{am}\n{en}" if am else en
+        txt = f"{pri}\n{en}" if (pri and lang != "en") else en
         cues.append((t + 0.15, t + d - 0.15, txt))
         t += d
     return cues
@@ -125,14 +126,15 @@ def main(mode="film"):
             f"subtitles={ff_path(srt_p)}:force_style='FontName={FONT},Alignment=2,Fontsize={fs},Outline=2,MarginV={mv}',"
             f"subtitles={ff_path(work/'end.srt')}:force_style='FontName={FONT},Alignment=10,Fontsize={es},Outline=2'[vout]"
         )
-        out = OUT / "final" / f"film_{asp}.mp4"
+        suffix = "" if LANG() == "am" else f"_{LANG()}"
+        out = OUT / "final" / f"film_{asp}{suffix}.mp4"
         a_idx = len(all_clips)
         ff(inputs + ["-i", str(audio), "-filter_complex", ";".join(fc_parts),
                      "-map", "[vout]", "-map", f"{a_idx}:a",
                      "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "24",
                      "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)])
         print(f"{out.name}: {total:.1f}s (music: {kind})")
-    log_run("assemble", "ffmpeg", None, {"mode": "film", "music": kind, "seconds": total}, None, time.time() - t0)
+    log_run("assemble", "ffmpeg", None, {"mode": "film", "lang": LANG(), "music": kind, "seconds": total}, None, time.time() - t0)
 
 if __name__ == "__main__":
     main(sys.argv[1] if len(sys.argv) > 1 else "film")

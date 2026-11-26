@@ -1,13 +1,13 @@
 # EXPERIMENTS (hypothesis -> change -> result; change ONE thing, fixed seed). Only log what you actually ran.
 ## E01 - TTS: does Afaan Oromoo come out intelligible?
 Hypothesis: Gemini TTS auto-detects language without explicit Oromo listing, so phonetics on Afaan Oromoo names/ejections (`dh`, `q`, `ny`, `ch`) may drift.
-Change: Ran `NARRATION_LANG=oro python -m pipeline.narration 01` and `07` (fell back to `gemini-2.5-flash-preview-tts`, voice `Kore`).
-Result: Generated `outputs/narration/oro/shot_01.wav` (`8.33s`, latency `17.5s`, `runs.jsonl` 17:35:39) and `shot_07.wav` (`12.01s`, latency `20.05s`, `runs.jsonl` 17:36:04). Native Oromo speaker intelligibility rating (1–5) pending review.
+Change: Generated all 10 shots with `NARRATION_LANG=oro python -m pipeline.run` (`01`, `07` on `2.5-flash-preview-tts`; `02`–`06`, `08`–`10` on `3.8-flash-tts`, voice `Kore`).
+Result: Full 10-shot `outputs/narration/oro/` (`radio_cut_oro.mp4` `86.32s`, `film_9x16_oro.mp4` & `film_16x9_oro.mp4` `88.82s`, `runs.jsonl`) built cleanly. Native Oromo speaker intelligibility rating (1–5) pending review.
 
 ## E02 - Oromo vs Amharic TTS (ceiling work: more languages)
 Hypothesis: Amharic (officially listed on Gemini TTS) is more intelligible and natural than Afaan Oromoo under identical voice (`Kore`) and style instructions.
-Change: Compared shots 01 and 07 across `NARRATION_LANG=am` vs `NARRATION_LANG=oro`.
-Result: Both languages generated valid 24 kHz mono WAVs (`am` shot 01 `6.54s` vs `oro` `8.33s`; `am` shot 07 `12.84s` vs `oro` `12.01s`). Native listener preference & error audit (1–5) pending review in `ETHICS.md` / `EXPERIMENTS.md`.
+Change: Built complete end-to-end cuts for both `NARRATION_LANG=am` (`87.28s`) and `NARRATION_LANG=oro` (`88.82s`) with language-aware bilingual subtitles (`am+en` and `oro+en`).
+Result: Both full 10-shot cuts play end-to-end within `60–90s` (`radio_cut_am.mp4` `84.78s` vs `radio_cut_oro.mp4` `86.32s`). Native listener preference & error audit (1–5) pending review in `ETHICS.md` / `EXPERIMENTS.md`.
 
 ## E03 - Single-portrait references (`ref_girl` + `ref_woman`) vs. 3-view turnaround sheet
 Hypothesis: Replacing the 3-view turnaround `ref_girl` with single waist-up Ethiopian portraits (`ref_girl`, `ref_woman`) eliminates multi-clone pasting and prevents FLUX from rendering non-Ethiopian adults in later scenes.

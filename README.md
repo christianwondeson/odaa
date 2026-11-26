@@ -12,7 +12,7 @@ python -m pipeline.run              # validate -> narration -> keyframes -> shot
 ```
 Or with `make` (Linux/macOS): `make env-check`, `make smoke`, `make radio`, `make film`, `make radio NARRATION_LANG=oro`.
 
-Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4`, `radio_cut_<lang>.mp4`. Narration lives in `outputs/narration/<lang>/`. Bilingual Amharic + English opening title, subtitles, and AI end card are burned into every export. Requires `ffmpeg` with `libass` and `Ebrima` (or Ethiopic-capable system font).
+Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4` (plus `film_9x16_oro.mp4` / `film_16x9_oro.mp4` when `NARRATION_LANG=oro`), and `radio_cut_<lang>.mp4`. Narration lives in `outputs/narration/<lang>/`. Bilingual opening title, `<lang> + en` subtitles, and AI end card are burned into every export. Requires `ffmpeg` with `libass` and `Ebrima` (or Ethiopic-capable system font).
 
 ## Stages (each reads `storyboard.json`, writes `outputs/<stage>/`)
 | Stage | Script | Model / tool | Runs where |
