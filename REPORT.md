@@ -50,4 +50,4 @@
 - **Deliverable Links:**
   - Repository: https://github.com/christianwondeson/odaa
   - Walkthrough video: `(TO FILL)`
-  - Public AI-labeled post: `(TO FILL)`
+  - Public AI-labeled post: https://www.tiktok.com/@christianwondeson/video/7712532010245360902
