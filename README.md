@@ -12,10 +12,11 @@ python -m pipeline.smoke_test       # one call per provider, logs latency to run
 python -m pipeline.benchmark_tts --include-existing  # compare TTS providers on shots 08 & 09
 python -m pipeline.run radio        # validate -> narration -> subtitled radio cut
 python -m pipeline.run              # validate -> narration -> keyframes -> shots -> music -> 9:16 + 16:9 film
+python -m pipeline.assemble mobile  # optional 720p (~11-12 MB) WhatsApp/Telegram share copy from 9:16 film
 ```
 Or with `make` (Linux/macOS): `make env-check`, `make smoke`, `make radio`, `make film`, `make radio NARRATION_LANG=oro`.
 
-Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4` (plus `film_9x16_oro.mp4` / `film_16x9_oro.mp4` when `NARRATION_LANG=oro`), and `radio_cut_<lang>.mp4`. Narration lives in `outputs/narration/<lang>/`. Bilingual opening title, `<lang> + en` subtitles, and AI end card are burned into every export. Requires `ffmpeg` with `libass` and `Ebrima` (or Ethiopic-capable system font).
+Outputs: `outputs/final/film_9x16.mp4`, `film_16x9.mp4` (`~21 MB` at 1080p; plus `film_9x16_mobile.mp4` `~11.7 MB` when `assemble mobile` is run, and `*_oro.mp4` variants), and `radio_cut_<lang>.mp4`. Narration lives in `outputs/narration/<lang>/`. Bilingual opening title, `<lang> + en` subtitles, and AI end card are burned into every export. Requires `ffmpeg` with `libass` and `Ebrima` (or Ethiopic-capable system font).
 
 ## Stages (each reads `storyboard.json`, writes `outputs/<stage>/`)
 | Stage | Script | Model / tool | Runs where |

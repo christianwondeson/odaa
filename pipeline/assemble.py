@@ -111,7 +111,26 @@ def mix(nar, music, total, out):
     ff(["-i", str(nar), "-i", str(music), "-filter_complex", fc, "-map", "[a]", "-t", str(total), "-ar", "48000", str(out)])
 
 
+def make_mobile_copies():
+    """Export 720p (~11-12 MB) WhatsApp/Telegram-friendly copies from existing 9:16 final films."""
+    lang = LANG()
+    suffix = "" if lang == "am" else f"_{lang}"
+    src = OUT / "final" / f"film_9x16{suffix}.mp4"
+    if not src.exists():
+        raise SystemExit(f"missing {src.name} (run assemble film first)")
+    dst = OUT / "final" / f"film_9x16{suffix}_mobile.mp4"
+    crf = os.environ.get("MOBILE_CRF", "24")
+    t0 = time.time()
+    ff(["-i", str(src), "-vf", "scale=720:-2", "-c:v", "libx264", "-crf", crf, "-preset", "slow",
+        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", str(dst)])
+    dur = media_duration(dst)
+    log_run("assemble", "ffmpeg-mobile", None, {"lang": lang, "crf": crf, "mb": round(dst.stat().st_size / 1048576, 2), "seconds": round(dur, 2)}, None, time.time() - t0)
+    print(f"{dst.name}: {dur:.2f}s ({dst.stat().st_size / 1048576:.2f} MB)")
+
+
 def main(mode="film"):
+    if mode == "mobile":
+        make_mobile_copies(); return
     sb = load_storyboard(); work = OUT / "work"; work.mkdir(parents=True, exist_ok=True)
     (OUT / "final").mkdir(parents=True, exist_ok=True); t0 = time.time()
     durs = [shot_seconds(s) for s in sb["shots"]]; body = sum(durs)
@@ -172,10 +191,11 @@ def main(mode="film"):
         suffix = "" if LANG() == "am" else f"_{LANG()}"
         out = OUT / "final" / f"film_{asp}{suffix}.mp4"
         a_idx = len(all_clips)
+        crf = os.environ.get("VIDEO_CRF", "24")
         ff(inputs + ["-i", str(audio), "-filter_complex", ";".join(fc_parts),
                      "-map", "[vout]", "-map", f"{a_idx}:a",
-                     "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "24",
-                     "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)])
+                     "-c:v", "libx264", "-crf", crf, "-preset", "slow", "-pix_fmt", "yuv420p", "-r", "24",
+                     "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-shortest", str(out)])
         actual = media_duration(out)
         if abs(actual - total) > 0.6:
             raise RuntimeError(f"{out.name} duration mismatch: expected {total:.2f}s, got {actual:.2f}s")

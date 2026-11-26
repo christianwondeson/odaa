@@ -69,5 +69,10 @@ Hypothesis: Revising Shot 03's mother line (`ስትጠራት` -> `ከሷ ጋር 
 Change: Updated Shots `03` and `05` in `storyboard.json` and `docs/AMHARIC_SCRIPT.md`, invalidated Shot `10`'s `2.5` cache entry and `oro` Shot `03` cache, and regenerated `03` (`gemini-3.8-flash-tts`), `05`, and `10` (`gemini-3.8-flash-lite-tts`), keeping untouched shots cached.
 Result: Rebuilt all 6 MP4 deliverables cleanly inside the `60–90s` target: `film_9x16.mp4` & `film_16x9.mp4` (`88.74s`), `radio_cut_am.mp4` (`86.24s`), `film_9x16_oro.mp4` & `film_16x9_oro.mp4` (`89.88s`), and `radio_cut_oro.mp4` (`87.38s`).
 
+## E14 - Reducing MP4 file size (`37.19 MB` -> `11–21 MB`) without losing subtitle/face clarity
+Hypothesis: Switching slow-motion 24fps illustrated film encoding from `-crf 20` (`medium`, `192k` AAC) to `-crf 24 -preset slow` (`128k` AAC) plus an optional `720p` (`mobile`) export cuts file size by 40–70% for WhatsApp/Telegram testers with negligible perceptual loss.
+Change: Benchmarked `CRF 24`/`25`/`26` (`1080p`) and `720p CRF 24` on `film_9x16.mp4`, inspected `shot_07` PNG frames, updated default `VIDEO_CRF=24 -preset slow -b:a 128k` in `pipeline/assemble.py`, and added `python -m pipeline.assemble mobile`.
+Result: Measured `film_9x16.mp4` dropped from `37.19 MB` (`CRF 20`) to `21.16 MB` (`1080p CRF 24`), `film_16x9.mp4` to `20.68 MB`, `film_9x16_oro.mp4` to `21.75 MB`, and 720p mobile shares (`film_9x16_mobile.mp4` `11.68 MB`, `film_9x16_oro_mobile.mp4` `11.97 MB`), keeping face, sketch ink, and `Ebrima` bilingual subtitles sharp.
+
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).
