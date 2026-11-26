@@ -96,7 +96,7 @@ def narration_tempo(shot_id):
         return 1.0
     if os.environ.get("TTS_PROVIDER", "gemini").strip().lower() in ("hasab", "addis"):
         return 1.0
-    return 1.26 if LANG() == "oro" else 1.22
+    return 1.32 if LANG() == "oro" else 1.25
 
 
 LANG = lambda: os.environ.get("NARRATION_LANG", "am")

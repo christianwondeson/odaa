@@ -8,9 +8,12 @@ Why fiction: inspired by a real life; identifying details omitted and no real pe
 ## Why each shot exists
 See the `reason` field of every shot in storyboard.json.
 
-## User test 1 - radio / early cut (26 Nov 2026 — 2 testers logged so far; 1+ more needed for 3+ total)
+## User test 1 - radio / early cut (26 Nov 2026 — 3 testers logged)
 - **Tester 1:** Understood the plot cleanly (*girl raised by single mom, remarriage reminded mom of old husband, oppressed with new children, became a designer*) and remembered the mom-relationship line. Felt *"a tiny bit of pity, but the AI voice was kind of funny"* and *"on second thought didn't understand what the message of the video was."*
 - **Tester 2:** Felt the target audience needed to be narrowed for deeper impact, encouraged the project as a first film, and specifically praised the opening Odaa tree and seed line.
-- **Tester 3:** `(TO FILL: add 1+ more listener for User test 1)`
-- **What changed in `DESIGN.md` & `storyboard.json` because of them:** (1) Narrowed target audience to young Ethiopian women (16–28) in blended/step-family households; (2) Added an explicit self-rescue turning-point line in Shot `07` (*"So she chose to save herself..."*) to bridge the gap after Shot `06` (*"no one is coming to save her"*); (3) Tied Shot `10`'s closing line directly back to the Shot `01` seed & Odaa shelter metaphor so the core message lands clearly. *(Also noted the "AI voice was funny" critique for honest reflection vs. recording `voice_override/`.)*
-## User test 2 - near-final cut (TO FILL: 3+ people watching `film_9x16_mobile.mp4` on a phone)
+- **Tester 3:** Appreciated the core message that women deserve respect, but felt the story felt somewhat generic in places and lacked emotional depth & a smooth transition showing how she grew from a young child into an adult design professional.
+- **What changed in `DESIGN.md` & `storyboard.json` because of them:**
+  1. *(From Tester 2)* Narrowed target audience to young Ethiopian women (16–28) in blended/step-family households.
+  2. *(From Tester 1)* Added an explicit self-rescue turning-point line in Shot `07` (*"So she chose to save herself..."*) and tied Shot `10` back to the Shot `01` seed & Odaa shelter so the takeaway message lands unmistakably.
+  3. *(From Tester 3)* Rewrote the **Shot `08`** time-passage bridge from abstract root imagery alone to specific lived transition (*"Years passed; working by day and studying traditional design patterns in her blue notebook by night, her hidden roots grew deep"*), smoothing the leap from child learner (`Shot 07`) to adult textile studio leader (`Shot 09`).
+## User test 2 - near-final cut (TO FILL: 3+ people watching updated `film_9x16_mobile.mp4` on a phone)

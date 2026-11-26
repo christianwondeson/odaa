@@ -14,7 +14,7 @@
       },
       "am": {
         "name": "Amharic",
-        "reviewed": false
+        "reviewed": true
       }
     }
   },
@@ -37,7 +37,7 @@
   ],
   "end_card": {
     "text": "Made with AI. A fictional story honoring women rising beyond hardship.\nበAI የተሠራ። ሴቶች ከመከራ ተነሥተው ሕይወታቸውን ሲያሻሽሉ የሚያሳይ ታሪክ።",
-    "seconds": 2.5
+    "seconds": 2.0
   },
   "shots": [
     {
@@ -177,9 +177,9 @@
       "camera": "pan_up",
       "seed": 3108,
       "narration": {
-        "oro": "Dhiibbaa jalaa hiddishee dhokatee ture bishaan argatee gadi fagaatee cimaa deeme.",
-        "en": "Beneath the hardest stone, her hidden roots drank deep and held fast.",
-        "am": "በጭቆና ውስጥ ተደብቆ የነበረው ሥሯ ውኃ አግኝቶ በጥልቅ አደገ።"
+        "oro": "Waggoonni darban; guyyaa hojjettee, halkan dabtara ishee cuquliisatti dizaayinii aadaa qorachaa, hiddishee dhokate gadi fagaatee cime.",
+        "en": "Years passed; working by day and studying traditional patterns in her blue notebook by night, her hidden roots grew deep.",
+        "am": "ዓመታት አለፉ፤ ቀን እየሠራች ማታ በሰማያዊ ደብተሯ የጥበብ ንድፍ እያጠናች፣ ተደብቆ የነበረው ሥሯ በጥልቅ ጠነከረ።"
       },
       "music_cue": "warm strings swell softly",
       "refs": [

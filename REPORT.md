@@ -1,6 +1,6 @@
 # Report — Under the Odaa (በኦዳ ዛፍ ሥር)
 
-> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E15`, and failure logs `F01`–`F11` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require real human listening/testing, consent confirmation, optional Kaggle GPU outputs, and final publish links before submission.
+> **Submission status note:** All code, contract tests, API measurements, experiments `E01`–`E16`, and failure logs `F01`–`F11` below are grounded in repository logs (`runs.jsonl`, `outputs/benchmarks/`). Sections marked `(TO FILL)` require User Test 2 playback feedback, optional Kaggle GPU outputs, and final publish links before submission.
 
 ## 1. Story, Audience, and Why This Film Exists
 - **Title:** *Under the Odaa / በኦዳ ዛፍ ሥር* (`9:16` vertical primary for WhatsApp/TikTok, plus `16:9` widescreen).
@@ -21,7 +21,11 @@
 ## 4. Reflection & Learning from Audience + Listener Passes (`10 pts`)
 - **Hardest technical problem & solution (`F11`, `F05`, `F07`, `F09`):** Solving silent FFmpeg `xfade` stream truncation at `62.75 s` (`1:02.75`) when `am` and `oro` shared `outputs/shots/`, plus surviving `10 RPD` Gemini TTS caps via a 3-model endpoint chain (`Interactions` WAV vs `generateContent` PCM) and uncovering Addis AI's undocumented `client_request_id` requirement (`422`).
 - **Native Amharic Listener Pass (`E12`, `E13`):** Real playback flagged three exact issues: Shot `03` (`0:19`, `"called her"` -> updated to `"ከሷ ጋር እንድትኖር ስትፈቅድላት"` / *"allowed her to live with her"*), Shot `05` (`0:33`, dense `የታናናሾቿን` -> simplified to `የታናናሽ ልጆቹን`), and Shot `10` (`1:18`, `ጥላ` mispronounced on `2.5-preview` -> regenerated on `3.8-flash-lite-tts`). Comparing providers showed **Hasab AI** pronounced words more accurately, while **Gemini TTS** delivered warmer storytelling cadence (`Gemini` selected for final film).
-- **User Test 1 — Early Cut (`2/3+` logged in `DESIGN.md`, `E15`):** Tester 1 understood the plot cleanly and remembered the mother-past line, but felt only *"a tiny bit of pity"*, noted *"the AI voice was kind of funny"*, and missed the takeaway message. Tester 2 urged narrowing the target audience for greater depth while encouraging the opening Odaa tree and seed line. **Changes made:** narrowed target audience in `DESIGN.md` to young Ethiopian women (16–28) in blended/step-family households, added an explicit self-rescue turning point to Shot `07`, and tied Shot `10` back to the Shot `01` seed & Odaa shelter (`87.64 s` Amharic / `88.54 s` Oromo). *(1+ more tester needed for User Test 1.)*
+- **User Test 1 — Early Cut (`3/3` logged in `DESIGN.md`, `E15`, `E16`):**
+  - *Tester 1* understood the plot cleanly and remembered the mother-past line, but felt only *"a tiny bit of pity"*, noted *"the AI voice was kind of funny"*, and missed the takeaway message.
+  - *Tester 2* urged narrowing the target audience for greater depth while encouraging the opening Odaa tree and seed line.
+  - *Tester 3* appreciated the core respect-for-women message, but felt the story felt generic in places and lacked emotional depth & a smooth age/craft transition between being a young child and an adult designer.
+  - **Changes made directly from them:** (1) narrowed target audience in `DESIGN.md` to young Ethiopian women (16–28) in blended/step-family households; (2) added an explicit self-rescue turning point to Shot `07` (*"So she chose to save herself..."*) and closed Shot `10` back on the Shot `01` seed & Odaa shelter; (3) rewrote **Shot `08`** into an explicit child-to-adult craft transition (*"Years passed; working by day and studying traditional patterns in her blue notebook by night, her hidden roots grew deep"*) while keeping total runtimes inside `60–90 s` (`88.12 s` Amharic / `88.74 s` Oromo).
 - **User Test 2 — Near-Final Cut (3+ people, `DESIGN.md`):** `(TO FILL: date, 3+ people watching film_9x16.mp4 on phones, feedback on girl consistency across shots, ending under the Odaa tree, subtitle legibility, and final tweaks made.)`
 
 ## 5. Curiosity Beyond the Floor (`10 pts`)
@@ -32,7 +36,7 @@
 - **Agent Tooling (`E10`):** Packaged validation, shot inspection, single-shot regeneration, and `build_film` as an **MCP Server** ([pipeline/mcp_server.py](pipeline/mcp_server.py)) so any coding agent can operate the studio cleanly.
 
 ## 6. Costs, Measurement & Failures (`COSTS.md`, `FAILURES.md`)
-- Measured across `405` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`50/57` ok across 3 models, `809.83s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`232/232` ok, `2495.83s`), `assemble` (`35/35` ok, `2872.08s`), and `720p` mobile exports (`5/5` ok, `101.53s`).
+- Measured across `455` logged calls in `runs.jsonl`: keyframes (`52/52` ok, `500.58s`), narration on Gemini (`52/59` ok across 3 models, `841.89s`), `benchmark_tts` across Hasab/Addis/Gemini (`18/20` ok, `132.01s`), local FFmpeg Ken Burns (`268/268` ok, `2854.83s`), `assemble` (`43/43` ok, `3362.40s`), and `720p` mobile exports (`9/9` ok, `184.99s`).
 - Documented `11` real blockers (`F01`–`F11`), including Gemini `10 RPD` exhaustion, Windows FFmpeg `ass=` colon escaping, FLUX turnaround cloning, `flux-1-schnell` schema rejection, Addis AI's undocumented `client_request_id` requirement (`422`), `shot_06`'s crossed-knee extra-arm artifact, and shared `outputs/shots/` truncation under `xfade`.
 - **Kaggle GPU (`Wan 2.2` / `ACE-Step`):** `(TO FILL if run: GPU minutes, outputs/music/chosen.wav choice, Wan vs Ken Burns takeaway.)`
 
@@ -42,7 +46,7 @@
 3. **Zero-code web studio & showcase:** Deploy a Next.js + Vercel screening room for family reviewers with language/aspect toggles (`9:16`, `16:9`, `radio_cut`) and drag-and-drop preview uploads backed by the pipeline's MCP server (`pipeline/mcp_server.py`).
 
 ## 8. Ethics, Consent & Links (`ETHICS.md`)
-- **Consent & Native Review:** `(TO FILL: date mother approved story inspiration; confirmation that `am` and `oro` scripts + proverb were reviewed and set `reviewed: true`.)`
+- **Consent & Native Review:** Mother informed and consented directly on `26 Nov 2026` (private consent record kept offline, not published); Amharic script reviewed across `E12`, `E13`, `E15`, `E16` (`am`: `reviewed=true`); Afaan Oromoo (`oro`) & Odaa proverb remain `reviewed=false` pending an independent fluent Oromo audit.
 - **Deliverable Links:**
   - Repository: https://github.com/christianwondeson/odaa
   - Walkthrough video: `(TO FILL)`

@@ -38,9 +38,9 @@ Read each shot aloud naturally at an unhurried, intimate pace.
 - **Amharic:** ስለዚህ ራሷን ለማዳን ወሰነች። ሕመሟን ወደ ትጋት ቀይራ፣ ጎበዝ ተማሪ፣ ደፋር ተናጋሪና ፈጣን ዲዛይነር ሆና ወጣች።
 - **English:** So she chose to save herself. Turning pain into quiet grit, she excelled at school, spoke boldly, and became a swift designer.
 
-### Shot 08 (~5s) — Hidden Roots Drinking Deep
-- **Amharic:** በጭቆና ውስጥ ተደብቆ የነበረው ሥሯ ውኃ አግኝቶ በጥልቅ አደገ።
-- **English:** Beneath the hardest stone, her hidden roots drank deep and held fast.
+### Shot 08 (~6s) — Years Passing: Day Labor, Night Pattern Study, Growing Roots
+- **Amharic:** ዓመታት አለፉ፤ ቀን እየሠራች ማታ በሰማያዊ ደብተሯ የጥበብ ንድፍ እያጠናች፣ ተደብቆ የነበረው ሥሯ በጥልቅ ጠነከረ።
+- **English:** Years passed; working by day and studying traditional patterns in her blue notebook by night, her hidden roots grew deep.
 
 ### Shot 09 (~8s) — Leading Her Own Design Craft
 - **Amharic:** ዛሬ የራሷን የዲዛይን ሥራ የምትመራ፣ በግልጽ የምትናገርና ክብሯን የጠበቀች ጠንካራ ሴት ሆናለች።

@@ -79,5 +79,10 @@ Hypothesis: Narrowing the audience in `DESIGN.md` to young Ethiopian women (16�
 Change: Updated `DESIGN.md`, Shots `07` and `10` in `storyboard.json` and `docs/AMHARIC_SCRIPT.md`, set `oro` default tempo `1.22 -> 1.26` in `pipeline/common.py`, and regenerated only Shots `07` & `10` + rebuilt exports.
 Result: Rebuilt cleanly inside `60–90s`: `film_9x16.mp4` & `film_16x9.mp4` **`87.64s`** (`mobile` `11.66 MB`, `radio_cut_am.mp4` `85.14s`) and `film_9x16_oro.mp4` & `film_16x9_oro.mp4` **`88.54s`** (`mobile` `11.89 MB`, `radio_cut_oro.mp4` `86.04s`). Ready for `Tester 3` & `User test 2`.
 
+## E16 - Closing the child-to-adult design craft gap (`Shot 08`, Tester 3 feedback)
+Hypothesis: Rewriting Shot `08`'s narration from purely abstract roots to an explicit passage-of-time craft bridge (*"Years passed; working by day and studying traditional patterns in her blue notebook by night..."*) smooths the transition from 11-year-old student (`Shot 07`) to 28-year-old textile studio leader (`Shot 09`).
+Change: Updated Shot `08` in `storyboard.json` and `docs/AMHARIC_SCRIPT.md`, flipped `"am"` `reviewed=true`, tuned tempo defaults (`1.25x` `am` / `1.32x` `oro`) and `end_card.seconds` (`2.0 s`), regenerated only Shot `08` (`am` & `oro`), and rebuilt all cuts.
+Result: Rebuilt cleanly inside `60–90 s`: `film_9x16.mp4` & `film_16x9.mp4` **`88.12 s`** (`mobile` `11.84 MB`, `radio_cut_am.mp4` `86.12 s`) and `film_9x16_oro.mp4` & `film_16x9_oro.mp4` **`88.74 s`** (`mobile` `12.08 MB`, `radio_cut_oro.mp4` `86.74 s`). Ready for `User test 2`.
+
 ## Candidate experiments
 3 ACE-Step candidates; Wan vs Ken Burns on one shot; 4 vs 8 steps; human voice override vs Gemini TTS vs Hasab/Addis (`E12`); 5-person blind preference rating on `E09` (`outputs/benchmarks/` vs `outputs/keyframes/`).

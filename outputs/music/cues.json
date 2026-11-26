@@ -8,55 +8,55 @@
  {
   "shot": "02",
   "start": 6.0,
-  "end": 15.47,
+  "end": 15.25,
   "cue": "low warm bowed string, quiet ache"
  },
  {
   "shot": "03",
-  "start": 15.47,
-  "end": 26.97,
+  "start": 15.25,
+  "end": 26.48,
   "cue": "tense minimal strings"
  },
  {
   "shot": "04",
-  "start": 26.97,
-  "end": 36.11,
+  "start": 26.48,
+  "end": 35.48,
   "cue": "sparse cello note, gentle dissonance"
  },
  {
   "shot": "05",
-  "start": 36.11,
-  "end": 44.62,
+  "start": 35.48,
+  "end": 43.79,
   "cue": "low steady pulse, heavy mood"
  },
  {
   "shot": "06",
-  "start": 44.62,
-  "end": 52.02,
+  "start": 43.79,
+  "end": 51.02,
   "cue": "music drops to a single sustained tone"
  },
  {
   "shot": "07",
-  "start": 52.02,
-  "end": 61.02,
+  "start": 51.02,
+  "end": 60.02,
   "cue": "hopeful plucked krar melody enters and lifts"
  },
  {
   "shot": "08",
-  "start": 61.02,
-  "end": 67.23,
+  "start": 60.02,
+  "end": 68.69,
   "cue": "warm strings swell softly"
  },
  {
   "shot": "09",
-  "start": 67.23,
-  "end": 75.55,
+  "start": 68.69,
+  "end": 76.82,
   "cue": "uplifting main theme in full warmth"
  },
  {
   "shot": "10",
-  "start": 75.55,
-  "end": 85.17,
+  "start": 76.82,
+  "end": 86.21,
   "cue": "theme resolves gently and fades out"
  }
 ]
